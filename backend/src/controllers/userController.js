@@ -37,6 +37,34 @@ const registerUser = async (req, res) => {
   }
 };
 
-module.exports = {
-  registerUser,
-};
+
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+  
+    try {
+      // ตรวจสอบว่า email มีอยู่ในระบบหรือไม่
+      const user = await prisma.user.findUnique({
+        where: { email },
+      });
+  
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      // ตรวจสอบว่า password ตรงกันหรือไม่
+      if (user.password !== password) {
+        return res.status(401).json({ error: 'Invalid password' });
+      }
+  
+      // ส่งข้อมูลผู้ใช้กลับไป (สามารถเพิ่ม token ได้ในอนาคต)
+      res.status(200).json({ message: 'Login successful', user });
+    } catch (error) {
+      console.error('Error logging in user:', error);
+      res.status(500).json({ error: 'Failed to login user' });
+    }
+  };
+  
+  module.exports = {
+    loginUser,
+    registerUser,
+  };
