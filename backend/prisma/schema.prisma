@@ -10,10 +10,10 @@ datasource db {
 model User {
   UserID         Int       @id @default(autoincrement())
   name           String
+  phone          String
   email          String    @unique
   password       String
   studentCode    String?
-  userType       String    // ผู้ขาย/ผู้ซื้อ
   address        String?
   products       Product[]      @relation("UserProducts")
   wishlists      WishList[]
