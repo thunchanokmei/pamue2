@@ -15,6 +15,7 @@ model User {
   password       String
   studentCode    String?
   address        String?
+  QRurl          String?
   products       Product[]     
   wishlists      WishList[]
 }
@@ -24,9 +25,8 @@ model Product {
   name           String
   description    String?
   price          Float
-  productType    String?
   imageUrl       String?
-  condition      String?
+  condition      Int?
   saleDate       DateTime?
   seller         User     @relation(fields: [sellerId], references: [UserID]) 
   sellerId       Int
