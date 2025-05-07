@@ -12,6 +12,7 @@ const App = () => {
 
         {/* เส้นทางสำหรับหน้า Register */}
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

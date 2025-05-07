@@ -15,10 +15,33 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login Data Submitted:", formData);
-    // เพิ่ม logic สำหรับการเข้าสู่ระบบที่นี่
+  
+    try {
+      const response = await fetch("http://localhost:5001/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // ส่งข้อมูล formData ไปยัง backend
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        alert("Login successful!");
+        console.log("User logged in:", result);
+        // เปลี่ยนหน้าไปยังหน้าหลักหลังจากเข้าสู่ระบบสำเร็จ
+        navigate("/dashboard");
+      } else {
+        alert(`Error: ${result.error}`);
+        console.error("Login failed:", result.error);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to login. Please try again.");
+    }
   };
 
   return (

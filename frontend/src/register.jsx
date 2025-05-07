@@ -15,10 +15,32 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    // คุณสามารถเพิ่ม logic สำหรับส่งข้อมูลไปยัง backend ได้ที่นี่
+  
+    try {
+      const response = await fetch("http://localhost:5001/api/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // ส่งข้อมูล formData ไปยัง backend
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        alert("Registration successful!");
+        console.log("User registered:", result);
+        // คุณสามารถเพิ่ม logic เช่น redirect ไปหน้า login ได้ที่นี่
+      } else {
+        alert(`Error: ${result.error}`);
+        console.error("Registration failed:", result.error);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to register. Please try again.");
+    }
   };
 
   return (
