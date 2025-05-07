@@ -22,11 +22,11 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
-      <h2>สมัครสมาชิก</h2>
+    <div className="container-register">
+      <div className="form-container-register">
+      <h2>Join our Memberships 📦 </h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -34,10 +34,11 @@ const Register = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            placeholder="Name"
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="email">E-mail:</label>
           <input
             type="email"
@@ -45,10 +46,11 @@ const Register = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="E-mail (@dome.tu.ac.th)"
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="phone">Phone:</label>
           <input
             type="tel"
@@ -56,31 +58,34 @@ const Register = () => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
+            placeholder="Phone"
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="studentCode">Student Code:</label>
+        <div className="form-group-register">
+          <label htmlFor="studentCode">Student ID:</label>
           <input
             type="text"
             id="studentCode"
             name="studentCode"
             value={formData.studentCode}
             onChange={handleChange}
+            placeholder="Student ID"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="address">Address:</label>
           <textarea
             id="address"
             name="address"
             value={formData.address}
             onChange={handleChange}
+            placeholder="Address"
             required
             rows="3"
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   </div>

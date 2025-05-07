@@ -1,3 +1,8 @@
+hyml,body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 body {
     background-image: url('image/background.jpg');
     background-size: cover;
@@ -5,43 +10,44 @@ body {
     background-repeat: no-repeat;
     font-family: 'kanit',sans-serif;
 }
-.container {
+.form-container-register {
     max-width: 400px;
     margin: 0 auto;
-    padding: 80px;
+    padding: 200px;
+    margin-top: 100px;
 
 }
   
-  .container h2 {
+  .form-container-register h2 {
     text-align: center;
     color: #ffffff;
     font-family: 'kanit',sans-serif;
   }
-  .form-container {
-    border: px solid #ffea00; /* เธเธฃเธญเธเธชเธตเธเนเธณเน€เธเธดเธ */
-    border-radius: 30px; /* เธกเธธเธกเนเธเนเธ */
-    padding: 25px; /* เธฃเธฐเธขเธฐเธซเนเธฒเธเธ เธฒเธขเนเธ */
-    background-color: #6b9fff; /* เธชเธตเธเธทเนเธเธซเธฅเธฑเธ */
-    box-shadow: 0 4px 8px rgba(253, 253, 253, 0.1); /* เน€เธเธฒ */
+  .form-container-register{
+    border: 1px solid #0010ec; 
+    border-radius: 30px; 
+    padding: 50px; 
+    background-color: #5287f2; 
+    box-shadow: 0 4px 8px rgba(253, 253, 253, 0.1); 
   }
-  .form-group {
+  .form-group-register {
     margin-bottom: 15px;
   }
   
-  .form-group label {
+  .form-group-register label {
     display: block;
     margin-bottom: 5px;
     color: #ffffff;
   }
   
-  .form-group input,
-  .form-group textarea {
+  .form-group-register input,
+  .form-group-register textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     box-sizing: border-box;
     border-radius: 10px;
-    border: 1px solid #dededf; /* เธเธฃเธญเธเธชเธตเธเนเธณเน€เธเธดเธ */
+    border: 1px solid #111111; /* เธเธฃเธญเธเธชเธตเธเนเธณเน€เธเธดเธ */
 
   }
   
@@ -51,10 +57,13 @@ body {
     background-color: #fce918;
     color: #000000;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
   }
   
   button:hover {
     background-color: #0056b3;
   }
+input::placeholder {
+    color: #888;
+}

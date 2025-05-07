@@ -30,27 +30,29 @@ const Login = () => {
 
       {/* กล่องฟอร์ม */}
       <div className="form-container">
-        <h2>Welcome to Pamue 2</h2>
+        <h2>เข้าสู่ระบบ</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">E-mail (@dome.tu):</label>
+            <label htmlFor="email"></label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              required
+              placeholder="E-mail (@dome.tu.ac.th)"
+            required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="studentCode">Student ID:</label>
+            <label htmlFor="studentCode"></label>
             <input
               type="text"
               id="studentCode"
               name="studentCode"
               value={formData.studentCode}
               onChange={handleChange}
+              placeholder="Student ID"
               required
             />
           </div>
