@@ -1,0 +1,60 @@
+body {
+    background-image: url('image/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'kanit',sans-serif;
+}
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 80px;
+
+}
+  
+  .container h2 {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+  }
+  .form-container {
+    border: px solid #ffea00; /* เธเธฃเธญเธเธชเธตเธเนเธณเน€เธเธดเธ */
+    border-radius: 30px; /* เธกเธธเธกเนเธเนเธ */
+    padding: 25px; /* เธฃเธฐเธขเธฐเธซเนเธฒเธเธ เธฒเธขเนเธ */
+    background-color: #6b9fff; /* เธชเธตเธเธทเนเธเธซเธฅเธฑเธ */
+    box-shadow: 0 4px 8px rgba(253, 253, 253, 0.1); /* เน€เธเธฒ */
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid #dededf; /* เธเธฃเธญเธเธชเธตเธเนเธณเน€เธเธดเธ */
+
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fce918;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
