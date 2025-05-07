@@ -15,7 +15,7 @@ model User {
   password       String
   studentCode    String?
   address        String?
-  products       Product[]      @relation("UserProducts")
+  products       Product[]     
   wishlists      WishList[]
 }
 
@@ -28,7 +28,7 @@ model Product {
   imageUrl       String?
   condition      String?
   saleDate       DateTime?
-  seller         User     @relation("UserProducts", fields: [sellerId], references: [UserID])
+  seller         User     @relation(fields: [sellerId], references: [UserID]) 
   sellerId       Int
   category       Category @relation(fields: [CategoryID], references: [CategoryID])
   CategoryID     Int
@@ -37,7 +37,7 @@ model Product {
 
 model Category {
   CategoryID     Int       @id @default(autoincrement())
-  name           String
+  name           String    @unique
   products       Product[]
 }
 
