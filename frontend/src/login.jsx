@@ -33,7 +33,7 @@ const Login = () => {
         alert("Login successful!");
         console.log("User logged in:", result);
         // เปลี่ยนหน้าไปยังหน้าหลักหลังจากเข้าสู่ระบบสำเร็จ
-        navigate("/dashboard");
+        navigate("/home");
       } else {
         alert(`Error: ${result.error}`);
         console.error("Login failed:", result.error);
