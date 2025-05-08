@@ -16,7 +16,8 @@ model User {
   studentCode    String?
   address        String?
   QRurl          String?
-  products       Product[]     
+  products       Product[] @relation("SellerRelation") // เชื่อมกับฟิลด์ seller ใน Product
+  purchases      Product[] @relation("CustomerRelation") // เชื่อมกับฟิลด์ customer ใน Product
   wishlists      WishList[]
 }
 
@@ -28,8 +29,11 @@ model Product {
   imageUrl       String?
   condition      Int?
   saleDate       DateTime?
-  seller         User     @relation(fields: [sellerId], references: [UserID]) 
+  status         ProductStatus? // เปลี่ยนเป็น Optional
+  seller         User     @relation("SellerRelation", fields: [sellerId], references: [UserID])
   sellerId       Int
+  customer       User?    @relation("CustomerRelation", fields: [customerId], references: [UserID]) // เปลี่ยนเป็น Optional
+  customerId     Int?
   category       Category @relation(fields: [CategoryID], references: [CategoryID])
   CategoryID     Int
   wishlists      WishList[]
@@ -47,4 +51,11 @@ model WishList {
   UserID         Int
   product        Product   @relation(fields: [ProductID], references: [ProductID])
   ProductID      Int
+}
+
+enum ProductStatus {
+  AVALIABLE
+  PAYMENT_CONFIRMATION
+  DELIVERING
+  COMPLETED
 }
