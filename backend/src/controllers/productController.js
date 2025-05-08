@@ -88,7 +88,7 @@ const purchaseProduct = async (req, res) => {
 
 const getProductsByCategory = async (req, res) => {
   const { categoryId } = req.query;
-
+  
   try {
     const products = categoryId
       ? await prisma.product.findMany({

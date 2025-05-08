@@ -8,22 +8,36 @@ const Home = () => {
 
   // ดึงข้อมูลหมวดหมู่
   useEffect(() => {
-    fetch('http://localhost:5001/api/products')
-      .then((res) => res.json())
-      .then((data) => setCategories(data))
-      .catch((error) => console.error('Error fetching categories:', error));
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/products/categories');
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+  
+    fetchCategories();
   }, []);
 
   // ดึงข้อมูลสินค้า
   useEffect(() => {
-    const url = selectedCategory
-      ? `http://localhost:5001/api/products/products?categoryId=${selectedCategory}`
-      : 'http://localhost:5001/api/products/products';
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Error fetching products:', error));
+    const fetchProducts = async () => {
+      const url = selectedCategory
+        ? `http://localhost:5001/api/products/products?categoryId=${selectedCategory}`
+        : 'http://localhost:5001/api/products/products';
+  
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+  
+    fetchProducts();
   }, [selectedCategory]);
 
   return (
