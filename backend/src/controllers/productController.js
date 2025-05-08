@@ -77,7 +77,7 @@ const purchaseProduct = async (req, res) => {
         status: 'PAYMENT_CONFIRMATION',
         paymentDate: new Date(paymentDate), // บันทึกเวลาที่โอนเงิน
       },
-    });
+    });    
 
     res.status(200).json({ message: 'Product purchased successfully', product: updatedProduct });
   } catch (error) {
@@ -86,9 +86,30 @@ const purchaseProduct = async (req, res) => {
   }
 };
 
+const getProductsByCategory = async (req, res) => {
+  const { categoryId } = req.query;
+
+  try {
+    const products = categoryId
+      ? await prisma.product.findMany({
+          where: { CategoryID: parseInt(categoryId) },
+          include: { category: true, seller: true },
+        })
+      : await prisma.product.findMany({
+          include: { category: true, seller: true },
+        });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Failed to fetch products' });
+  }
+};
+
 module.exports = {
   getAllCategories,
   addProduct,
   getProductById,
   purchaseProduct,
+  getProductsByCategory,
 };
