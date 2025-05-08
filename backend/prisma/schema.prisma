@@ -37,6 +37,7 @@ model Product {
   category       Category @relation(fields: [CategoryID], references: [CategoryID])
   CategoryID     Int
   wishlists      WishList[]
+  paymentDate    DateTime? // เวลาที่โอนเงิน
 }
 
 model Category {

@@ -26,6 +26,7 @@ const addProduct = async (req, res) => {
         saleDate: new Date(saleDate), // แปลง saleDate เป็น Date object
         sellerId,
         CategoryID,
+        status: 'AVALIABLE',
       }, 
     });
 
@@ -61,32 +62,20 @@ const getProductById = async (req, res) => {
 };
 
 const purchaseProduct = async (req, res) => {
-  const { productId, customerId } = req.body;
+  const { productId, customerId, paymentDate } = req.body;
 
   try {
-    // ตรวจสอบว่าสินค้าและผู้ซื้อมีอยู่ในระบบหรือไม่
     const product = await prisma.product.findUnique({ where: { ProductID: productId } });
-    const customer = await prisma.user.findUnique({ where: { UserID: customerId } });
-
     if (!product) {
       return res.status(404).json({ error: 'Product not found' });
     }
 
-    if (!customer) {
-      return res.status(404).json({ error: 'Customer not found' });
-    }
-
-    // ตรวจสอบว่าสินค้ามีสถานะ "AVALIABLE" หรือไม่
-    if (product.status !== 'AVALIABLE') {
-      return res.status(400).json({ error: 'Product is not available for purchase' });
-    }
-
-    // อัปเดตสถานะสินค้าและเพิ่ม customerId
     const updatedProduct = await prisma.product.update({
       where: { ProductID: productId },
       data: {
         customerId,
-        status: 'PAYMENT_CONFIRMATION', // เปลี่ยนสถานะสินค้า
+        status: 'PAYMENT_CONFIRMATION',
+        paymentDate: new Date(paymentDate), // บันทึกเวลาที่โอนเงิน
       },
     });
 
