@@ -1,22 +1,63 @@
-.seller-page-container {
-    padding: 120px 20px 20px; /* เพิ่ม padding-top เพื่อเว้นระยะจาก Topbar */
-  }
-  
+/* sellerpage.css */
+.seller-page {
+  display: flex;
+  height: 100vh; /* ให้เต็มความสูงของหน้าจอ */
+  background-color: rgb(255, 255, 255);
+}
+
+.seller-left {
+  position: fixed; /* ทำให้ด้านซ้ายอยู่กับที่ */
+  height: 100vh; /* ให้เต็มความสูงของหน้าจอ */
+  background-color: #ffffff; /* สีพื้นหลังของด้านซ้าย */
+}
+.seller-right {
+  margin-left: 30%; /* เว้นพื้นที่ด้านซ้ายสำหรับ ProfileLeft */
+  width: 60%;
+  height: 75vh; /* กำหนดความสูงของด้านขวา */
+  overflow-y: auto; /* เพิ่ม scroll หากเนื้อหาเกิน */
+  margin-top: 180px;
+  margin-left: 500px;
+  border:1px solid #ffffff;
+  border-radius: 50px;
+  background-color: rgb(237, 237, 237);
+}
+.seller-right h2 {
+  text-align: left; 
+  margin-left: 80px;
+  margin-top: 60px;
+  color: #007aff;
+  font-family: 'kanit', sans-serif;
+}
   .seller-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .seller-options button {
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: left;
-  }
-  
-  .seller-options button:hover {
-    background-color: #e0e0e0;
-  }
+  margin-top: 20px;
+}
+
+.seller-options button {
+  margin-right: 10px;
+  margin-bottom: 15px;
+  margin-left: 80px;
+  margin-top: 10px;
+  padding: 25px 25px;
+  background-color: #ffffff;
+  color: #007aff;
+  border: 1px solid #858585;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 80%;
+  font-weight: bolder;
+  font-size: 20px;
+  font-family: 'kanit', sans-serif;
+  text-align: left;;
+  padding-left: 50px;
+}
+
+.seller-options button:hover {
+  background-color: #258cfb;
+}
+
+.seller-content {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
+}

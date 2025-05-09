@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ใช้สำหรับเปลี่ยนหน้า
 import "./login.css"; // นำเข้าไฟล์ CSS
-import logo from "./image/logo.png"; // อิมพอร์ตรูปโลโก้
+import logo from "./image/profilexoxo.gif"; // อิมพอร์ตรูปโลโก้
 
 const Login = () => {
   const navigate = useNavigate(); // ใช้สำหรับเปลี่ยนหน้า

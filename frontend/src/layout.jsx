@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./profileleft.css"; // นำเข้าไฟล์ CSS
+import "./layout.css"; // นำเข้าไฟล์ CSS
 import profilepic from "./image/profilepic.jpg";
 import iconseller from "./image/iconseller.png";
 import iconwishlist from "./image/iconwishlist.png";

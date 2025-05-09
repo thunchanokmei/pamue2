@@ -45,3 +45,26 @@ body {
     height: auto;
     border-radius: 5px;
   }
+  /* ส่วนแสดงแบนเนอร์ */
+  .banners {
+    display: flex;
+    flex-direction: column; /* จัดแบนเนอร์ในแนวตั้ง */
+    gap: 10px; /* เพิ่มระยะห่างระหว่างแบนเนอร์ */
+    margin-bottom: 20px; /* ระยะห่างระหว่างแบนเนอร์กับ categories */
+  }
+  
+  .banner1,
+  .banner2 {
+    width: 100%; /* ให้แบนเนอร์เต็มความกว้างของคอนเทนเนอร์ */
+    border-radius: 10px; /* มุมโค้ง */
+    overflow: hidden; /* ซ่อนส่วนเกิน */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+    margin-top: 20px;
+  }
+  
+  .banner1 img,
+  .banner2 img {
+    width: 100%; /* ให้รูปภาพเต็มความกว้างของแบนเนอร์ */
+    height: auto; /* ปรับความสูงอัตโนมัติ */
+    display: block; /* ป้องกันช่องว่างด้านล่างรูปภาพ */
+  }

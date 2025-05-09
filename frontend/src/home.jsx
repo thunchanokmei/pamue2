@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar"; // นำเข้า SearchBar
 import "./home.css";
+import banner1 from "./image/banner1.jpg"; // นำเข้าภาพแบนเนอร์
+import banner2 from "./image/banner2.jpg"; // นำเข้าภาพแบนเนอร์
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
@@ -49,7 +51,15 @@ const Home = () => {
     <div className="home-container">
       {/* ใช้ SearchBar แทน Topbar */}
       <SearchBar onSearch={setSearchQuery} />
-
+      {/* ส่วนแสดงแบนเนอร์ */}
+    <div className="banners">
+      <div className="banner1">
+        <img src={banner1} alt="Banner 1" />
+      </div>
+      <div className="banner2">
+        <img src={banner2} alt="Banner 2" />
+      </div>
+    </div>
       {/* ส่วนแสดงปุ่ม Category */}
       <div className="categories">
         <button

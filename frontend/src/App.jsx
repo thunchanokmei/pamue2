@@ -1,47 +1,41 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Topbar from "./topbar"; // นำเข้า Topbar
 import Login from "./login";
 import Register from "./register";
 import Home from "./home";
-import Topbar from "./topbar"; // นำเข้า Topbar
-import AvailableProduct from "./availableproduct";
+import ProfileLeft from "./layout";
 import SellerPage from "./sellerpage";
-import ProfileLeft from "./profileleft"; // นำเข้าหน้า ProfileLeft
-import ConfirmPayment from "./confirmpayment";
-
-// คอมโพเนนต์สำหรับแสดง Topbar เฉพาะบางหน้า
-const Layout = ({ children }) => {
-  const location = useLocation();
-
-  // ตรวจสอบเส้นทางปัจจุบัน
-  const hideTopbar = location.pathname === "/" || location.pathname === "/register"|| location.pathname === "/home";
-
-  return (
-    <>
-      {!hideTopbar && <Topbar />} {/* แสดง Topbar เฉพาะหน้าที่ไม่ใช่ Login และ Register */}
-      {children}
-    </>
-  );
-};
+import WishlistPage from "./wishlistpage";
+import StatusPage from "./statuspage";
+import AboutUsPage from "./aboutuspage";
 
 const App = () => {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<ProfileLeft />} />
-          <Route path="/wishlist" element={<div>Wish List Page</div>} />
-          <Route path="/seller" element={<SellerPage />} />
-          <Route path="/availableproduct" element={<AvailableProduct />} />
-          <Route path="/confirmpayment" element={<ConfirmPayment />} />
-          <Route path="/status" element={<div>Status Page</div>} />
-          <Route path="/aboutus" element={<div>About Us Page</div>} />
-        </Routes>
-      </Layout>
+      <AppContent />
     </Router>
+  );
+};
+
+const AppContent = () => {
+  const location = useLocation(); // ใช้ useLocation เพื่อตรวจสอบเส้นทางปัจจุบัน
+  const hideTopbar = location.pathname === "/" || location.pathname === "/register"; // ซ่อน Topbar ในหน้า Login และ Register
+
+  return (
+    <>
+      {!hideTopbar && <Topbar />} {/* แสดง Topbar หากไม่ใช่หน้า Login หรือ Register */}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<ProfileLeft />} />
+        <Route path="/seller" element={<SellerPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/status" element={<StatusPage />} />
+        <Route path="/aboutus" element={<AboutUsPage />} />
+      </Routes>
+    </>
   );
 };
 

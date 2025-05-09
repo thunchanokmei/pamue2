@@ -1,0 +1,52 @@
+.aboutus-page {
+    display: flex;
+    height: 100vh; /* ให้เต็มความสูงของหน้าจอ */
+    background-color: #ffffff;
+  }
+  
+  .profile-left {
+    position: fixed;
+    width: 30%; /* กำหนดความกว้างของด้านซ้าย */
+    height: 100vh; /* ให้เต็มความสูงของหน้าจอ */
+    border-right: 1px solid #dcdcdc; /* เส้นแบ่งระหว่างซ้ายและขวา */
+    background-color: #ffffff; /* สีพื้นหลังของด้านซ้าย */
+    overflow-y: auto; /* เพิ่ม scroll หากเนื้อหาเกิน */
+  }
+  
+  .aboutus-right {
+    margin-left: 30%; /* เว้นพื้นที่ด้านซ้ายสำหรับ Profile Menu */
+    width: 60%; /* กำหนดความกว้างของด้านขวา */
+    height: 68vh; 
+    padding: 50px;
+    overflow-y: auto; /* เพิ่ม scroll หากเนื้อหาเกิน */
+    margin-top: 250px;
+    border:1px solid #dcdcdc;
+    background-color: #f3f2f2;  
+    border-radius: 50px;
+    margin-bottom: 65px;
+    margin-left: 455px;
+    margin-top: 170px;
+  }
+    .aboutus-content {
+    text-align: center; /* จัดข้อความและรูปภาพให้อยู่ตรงกลาง */
+  }
+  
+  .aboutus-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%; /* ทำให้รูปภาพเป็นวงกลม */
+    object-fit: cover;
+    margin-top: 60px; /* ระยะห่างระหว่างรูปภาพกับข้อความ */
+  }
+  
+
+  
+  .aboutus-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2px;
+    width: 100%;
+    text-align: center; 
+    color: #d3a202;
+
+  }

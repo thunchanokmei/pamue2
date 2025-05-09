@@ -13,10 +13,12 @@ body {
   left: 0; /* ชิดขอบซ้าย */
   right: 0; /* ชิดขอบขวา */
   z-index: 1000; /* ทำให้ Topbar อยู่เหนือองค์ประกอบอื่น */
+  transition: transform 0.3s ease, filter 0.3s ease; /* เพิ่มเอฟเฟกต์ */
 }
 
 .topbar-left .topbar-logo {
   height: 270px;
+  transition: transform 0.3s ease, filter 0.3s ease; /* เพิ่มเอฟเฟกต์ */
 }
 
 .topbar-center .topbar-search {
