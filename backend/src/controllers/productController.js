@@ -106,10 +106,27 @@ const getProductsByCategory = async (req, res) => {
   }
 };
 
+const getProductsByStatus = async (req, res) => {
+  const { status } = req.query;
+
+  try {
+    const products = await prisma.product.findMany({
+      where: { status },
+      include: { category: true, seller: true },
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products by status:", error);
+    res.status(500).json({ error: "Failed to fetch products by status" });
+  }
+};
+
 module.exports = {
   getAllCategories,
   addProduct,
   getProductById,
   purchaseProduct,
   getProductsByCategory,
+  getProductsByStatus,
 };

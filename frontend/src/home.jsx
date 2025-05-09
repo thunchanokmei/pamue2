@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import './home.css';
+import React, { useState, useEffect } from "react";
+import SearchBar from "./SearchBar"; // นำเข้า SearchBar
+import "./home.css";
 
 const Home = () => {
-  const [categories, setCategories] = useState([]); // เก็บข้อมูลหมวดหมู่
-  const [products, setProducts] = useState([]); // เก็บข้อมูลสินค้า
-  const [selectedCategory, setSelectedCategory] = useState(null); // เก็บหมวดหมู่ที่เลือก
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // ดึงข้อมูลหมวดหมู่
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch('http://localhost:5001/api/products/categories');
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-  
-    fetchCategories();
+    fetch("http://localhost:5001/api/products/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch((error) => console.error("Error fetching categories:", error));
   }, []);
 
   // ดึงข้อมูลสินค้า
@@ -26,57 +22,70 @@ const Home = () => {
     const fetchProducts = async () => {
       const url = selectedCategory
         ? `http://localhost:5001/api/products/products?categoryId=${selectedCategory}`
-        : 'http://localhost:5001/api/products/products';
-  
+        : "http://localhost:5001/api/products/products";
+
       try {
         const response = await fetch(url);
         const data = await response.json();
         setProducts(data);
+        setFilteredProducts(data); // ตั้งค่าเริ่มต้นให้สินค้าที่กรองแล้วเท่ากับสินค้าทั้งหมด
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     };
-  
+
     fetchProducts();
   }, [selectedCategory]);
 
+  // ฟังก์ชันสำหรับกรองสินค้าตามคำค้นหา
+  useEffect(() => {
+    const filtered = products.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  }, [searchQuery, products]);
+
   return (
-      <div className="home-container">
-        {/* ส่วนแสดงปุ่ม Category */}
-        <div className="categories">
+    <div className="home-container">
+      {/* ใช้ SearchBar แทน Topbar */}
+      <SearchBar onSearch={setSearchQuery} />
+
+      {/* ส่วนแสดงปุ่ม Category */}
+      <div className="categories">
+        <button
+          className={!selectedCategory ? "active" : ""}
+          onClick={() => setSelectedCategory(null)}
+        >
+          All Categories
+        </button>
+        {categories.map((category) => (
           <button
-            className={!selectedCategory ? 'active' : ''}
-            onClick={() => setSelectedCategory(null)}
+            key={category.CategoryID}
+            className={selectedCategory === category.CategoryID ? "active" : ""}
+            onClick={() => setSelectedCategory(category.CategoryID)}
           >
-            All Categories
+            {category.name}
           </button>
-          {categories.map((category) => (
-            <button
-              key={category.CategoryID}
-              className={selectedCategory === category.CategoryID ? 'active' : ''}
-              onClick={() => setSelectedCategory(category.CategoryID)}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
-        {/* ส่วนแสดงสินค้า */}
-        <div className="products">
-          {products.length > 0 ? (
-            products.map((product) => (
-              <div key={product.ProductID} className="product-card">
-                <img src={product.imageUrl} alt={product.name} />
-                <h3>{product.name}</h3>
-                <p>{product.description}</p>
-                <p>Price: {product.price} THB</p>
-                <p>Category: {product.category?.name || 'No Category'}</p>
-              </div>
-            ))
-          ) : (
-            <p>No products available</p>
-          )}
-        </div>
+        ))}
       </div>
+
+      {/* ส่วนแสดงสินค้า */}
+      <div className="products">
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <div key={product.ProductID} className="product-card">
+              <img src={product.imageUrl} alt={product.name} />
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p>Price: {product.price} THB</p>
+              <p>Category: {product.category?.name || "No Category"}</p>
+            </div>
+          ))
+        ) : (
+          <p>No products found</p>
+        )}
+      </div>
+    </div>
   );
 };
 
