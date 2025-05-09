@@ -17,7 +17,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
       const response = await fetch("http://localhost:5001/api/user/register", {
         method: "POST",
@@ -28,7 +27,7 @@ const Register = () => {
       });
   
       const result = await response.json();
-  
+
       if (response.ok) {
         alert("Registration successful!");
         console.log("User registered:", result);
