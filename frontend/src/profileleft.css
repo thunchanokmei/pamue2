@@ -1,0 +1,223 @@
+/* กรอบรวมของรูปภาพและปุ่มเมนู */
+body {
+  background-color:#F5F5f5 !important;
+}  
+.profile-menu {
+  width: 30%;
+  height: 760px;
+  padding: 15px;
+  border: 1px solid #dcdcdc; /* กรอบรอบกล่อง */
+  border-radius: 50px; /* มุมโค้งมน */
+  background-color: #ffffff; /* สีพื้นหลังของกล่อง */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+  text-align: center; /* จัดให้อยู่ตรงกลาง */
+}
+.profile-name {
+  font-size: 60px; /* ขนาดตัวอักษร */
+  font-weight: bold; /* ตัวหนา */
+  color: #007aff;
+  margin-top: 5px; /* ระยะห่างจากรูปภาพ */
+  text-align: center; /* จัดให้อยู่ตรงกลาง */
+}
+/* รูปภาพโปรไฟล์ */
+.profile-image-container {
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%; /* ทำให้รูปภาพเป็นวงกลม */
+  object-fit: cover;
+  margin-bottom: 10px;
+  margin-top: 40px;
+  border: 5px solid #dcdcdc; 
+}
+/* ปุ่มอัปโหลดรูปภาพ */
+.upload-button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.upload-button:hover {
+  background-color: #0056b3;
+}
+/* ปุ่มเมนูทั่วไป */
+.menu-button {
+  width: 100%; /* ปุ่มเต็มความกว้างของกล่อง */
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 4px; /* มุมโค้งมนของปุ่ม */
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 10px
+}
+
+.menu-button:hover {
+  background-color: #ffffff;
+}
+
+/* ปุ่ม Profile */
+.profile-button {
+  width: 100%; 
+  background-color: #ffffff;
+  color: #007aff;
+  font-weight: thick;
+  font-size: 20px;
+  border-top: 1px solid #dcdcdc;
+  border-radius: 0;
+  margin-top: 7%;
+
+}
+
+.profile-button:hover {
+  background-color: #bbdefb;
+}
+
+/* ปุ่ม Seller */
+.seller-button {
+  width: 100%; 
+  background-color: #ffffff;
+  color: #007aff;
+  font-weight: thick;
+  font-size: 20px;
+  border-top: 1px solid #dcdcdc;
+  border-radius: 0;
+}
+
+.seller-button:hover {
+  background-color: #bbdefb;
+}
+
+/* ปุ่ม Wish List */
+.wishlist-button {
+  background-color: #ffffff;
+  color: #007aff;
+  width: 100%;
+  font-weight: thick;
+  font-size: 20px;
+  border-top: 1px solid #dcdcdc;
+  border-radius: 0;
+}
+
+.wishlist-button:hover {
+  background-color: #bbdefb;
+}
+
+/* ปุ่ม Status */
+.status-button {
+  background-color: #ffffff;
+  color: #007aff;
+  width: 100%;
+  font-weight: thick;
+  font-size: 20px;
+  border-top: 1px solid #dcdcdc;
+  border-radius: 0;
+}
+
+.status-button:hover {
+  background-color: #bbdefb;
+
+}
+
+/* ปุ่ม About Us */
+.aboutus-button {
+  background-color: #ffffff;
+  color: #007aff;
+  width: 100%;;
+  font-weight: thick;
+  font-size: 20px;
+  border-top: 1px solid #dcdcdc;
+  border-radius: 0;
+}
+
+.aboutus-button:hover {
+  background-color: #bbdefb;
+}
+/* ปุ่มเมนูทั่วไป */
+.menu-button {
+  display: flex; /* ใช้ flexbox เพื่อจัดเรียงไอคอนและข้อความ */
+  align-items: center; /* จัดให้อยู่ตรงกลางแนวตั้ง */
+  justify-content: flex-start; /* จัดให้อยู่ชิดซ้าย */
+  width: 100%;
+  padding: 15px;
+  background-color: #ffffff;
+  border: none;
+  border-top: 1px solid #dcdcdc;
+  border-radius: 0;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.menu-icon {
+  width: 24px; /* กำหนดขนาดของไอคอน */
+  height: 24px;
+  margin-right: 10px; /* เพิ่มระยะห่างระหว่างไอคอนและข้อความ */
+  transition: transform 0.3s ease, filter 0.3s ease; /* เพิ่มเอฟเฟกต์ */
+}
+
+.menu-button:hover .menu-icon {
+  transform: scale(1.2); /* ขยายไอคอนเมื่อ hover */
+  filter: brightness(1.2); /* เพิ่มความสว่าง */
+}
+
+/* ปุ่ม Profile */
+.profile-button .menu-icon {
+  filter: hue-rotate(0deg); /* สีปกติ */
+}
+
+.profile-button:hover .menu-icon {
+  filter: hue-rotate(0deg); /* เปลี่ยนสีเมื่อ hover */
+}
+
+/* ปุ่ม Seller */
+.seller-button .menu-icon {
+  filter: hue-rotate(0deg); /* สีปกติ */
+}
+
+.seller-button:hover .menu-icon {
+  filter: hue-rotate(0deg); /* เปลี่ยนสีเมื่อ hover */
+}
+
+/* ปุ่ม Wish List */
+.wishlist-button .menu-icon {
+  filter: hue-rotate(0deg); /* สีปกติ */
+}
+
+.wishlist-button:hover .menu-icon {
+  filter: hue-rotate(0deg); /* เปลี่ยนสีเมื่อ hover */
+}
+
+/* ปุ่ม Status */
+.status-button .menu-icon {
+  filter: hue-rotate(0deg); /* สีปกติ */
+}
+
+.status-button:hover .menu-icon {
+  filter: hue-rotate(0deg); /* เปลี่ยนสีเมื่อ hover */
+}
+
+/* ปุ่ม About Us */
+.aboutus-button .menu-icon {
+  filter: hue-rotate(0deg); /* สีปกติ */
+}
+
+.aboutus-button:hover .menu-icon {
+  filter: hue-rotate(0deg); /* เปลี่ยนสีเมื่อ hover */
+}
+.profile-name {
+  font-size: 20px; /* ขนาดตัวอักษร */
+  font-weight: bold; /* ตัวหนา */
+  color: #007aff; /* สีน้ำเงิน */
+  margin-top: 10px; /* ระยะห่างจากรูปภาพ */
+  text-align: center; /* จัดให้อยู่ตรงกลาง */
+}

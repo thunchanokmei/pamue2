@@ -12,7 +12,13 @@ const Topbar = () => {
     <div className="topbar">
       {/* Left Section: Logo */}
       <div className="topbar-left">
-        <img src={logo} alt="Logo" className="topbar-logo" />
+        <img
+          src={logo}
+          alt="Logo"
+          className="topbar-logo"
+          onClick={() => navigate("/home")} // เพิ่ม onClick เพื่อกลับไปหน้าโฮม
+          style={{ cursor: "pointer" }} // เพิ่ม cursor pointer เพื่อแสดงว่ากดได้
+        />
       </div>
 
       {/* Center Section: Search Bar */}

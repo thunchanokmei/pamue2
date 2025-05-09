@@ -26,14 +26,16 @@ const Login = () => {
         },
         body: JSON.stringify(formData), // ส่งข้อมูล formData ไปยัง backend
       });
-  
-      const result = await response.json()
+
+      const result = await response.json();
 
       if (response.ok) {
         alert("Login successful!");
         console.log("User logged in:", result);
-        // เปลี่ยนหน้าไปยังหน้าหลักหลังจากเข้าสู่ระบบสำเร็จ
-        navigate("/home");
+
+        // ส่งชื่อผู้ใช้ไปยังหน้า Profile
+        const username = result.username || "Guest"; // รับชื่อผู้ใช้จาก backend หรือใช้ "Guest" เป็นค่าเริ่มต้น
+        navigate("/profile", { state: { username } }); // เปลี่ยนหน้าไปยัง Profile พร้อมส่งชื่อผู้ใช้
       } else {
         alert(`Error: ${result.error}`);
         console.error("Login failed:", result.error);
@@ -64,7 +66,7 @@ const Login = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="E-mail (@dome.tu.ac.th)"
-            required
+              required
             />
           </div>
           <div className="form-group">
@@ -79,7 +81,9 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className="login-button">เข้าสู่ระบบ</button>
+          <button type="submit" className="login-button">
+            เข้าสู่ระบบ
+          </button>
         </form>
         <p className="register-link">
           ยังไม่มีบัญชีใช่หรือไม่?{" "}
