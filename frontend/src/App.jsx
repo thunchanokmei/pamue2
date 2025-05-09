@@ -1,23 +1,37 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // นำเข้า React Router
-import Login from "./login"; // นำเข้าหน้า Login
-import Register from "./register"; // นำเข้าหน้า Register
-import Home from "./home"; // นำเข้าหน้า Home
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Login from "./login";
+import Register from "./register";
+import Home from "./home";
+import Topbar from "./topbar"; // นำเข้า Topbar
+
+// คอมโพเนนต์สำหรับแสดง Topbar เฉพาะบางหน้า
+const Layout = ({ children }) => {
+  const location = useLocation();
+
+  // ตรวจสอบเส้นทางปัจจุบัน
+  const hideTopbar = location.pathname === "/" || location.pathname === "/register";
+
+  return (
+    <>
+      {!hideTopbar && <Topbar />} {/* แสดง Topbar เฉพาะหน้าที่ไม่ใช่ Login และ Register */}
+      {children}
+    </>
+  );
+};
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        {/* เส้นทางสำหรับหน้า Login */}
-        <Route path="/" element={<Login />} />
-
-        {/* เส้นทางสำหรับหน้า Register */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-
-        {/* เส้นทางสำหรับหน้า Home */}
-        <Route path="/home" element={<Home />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/wishlist" element={<div>Wish List Page</div>} />
+          <Route path="/profile" element={<div>Profile Page</div>} />
+        </Routes>
+      </Layout>
     </Router>
   );
 };

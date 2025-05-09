@@ -41,43 +41,42 @@ const Home = () => {
   }, [selectedCategory]);
 
   return (
-    <div className="home-container">
-      {/* ส่วนแสดงปุ่ม Category */}
-      <div className="categories">
-        <button
-          className={!selectedCategory ? 'active' : ''}
-          onClick={() => setSelectedCategory(null)}
-        >
-          All Categories
-        </button>
-        {categories.map((category) => (
+      <div className="home-container">
+        {/* ส่วนแสดงปุ่ม Category */}
+        <div className="categories">
           <button
-            key={category.CategoryID}
-            className={selectedCategory === category.CategoryID ? 'active' : ''}
-            onClick={() => setSelectedCategory(category.CategoryID)}
+            className={!selectedCategory ? 'active' : ''}
+            onClick={() => setSelectedCategory(null)}
           >
-            {category.name}
+            All Categories
           </button>
-        ))}
+          {categories.map((category) => (
+            <button
+              key={category.CategoryID}
+              className={selectedCategory === category.CategoryID ? 'active' : ''}
+              onClick={() => setSelectedCategory(category.CategoryID)}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
+        {/* ส่วนแสดงสินค้า */}
+        <div className="products">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div key={product.ProductID} className="product-card">
+                <img src={product.imageUrl} alt={product.name} />
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
+                <p>Price: {product.price} THB</p>
+                <p>Category: {product.category?.name || 'No Category'}</p>
+              </div>
+            ))
+          ) : (
+            <p>No products available</p>
+          )}
+        </div>
       </div>
-
-      {/* ส่วนแสดงสินค้า */}
-      <div className="products">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <div key={product.ProductID} className="product-card">
-              <img src={product.imageUrl} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-              <p>Price: {product.price} THB</p>
-              <p>Category: {product.category?.name || 'No Category'}</p>
-            </div>
-          ))
-        ) : (
-          <p>No products available</p>
-        )}
-      </div>
-    </div>
   );
 };
 
