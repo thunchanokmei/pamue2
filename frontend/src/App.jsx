@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   const location = useLocation();
 
   // ตรวจสอบเส้นทางปัจจุบัน
-  const hideTopbar = location.pathname === "/" || location.pathname === "/register";
+  const hideTopbar = location.pathname === "/" || location.pathname === "/register"|| location.pathname === "/home";
 
   return (
     <>
@@ -29,7 +29,9 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/wishlist" element={<div>Wish List Page</div>} />
-          <Route path="/profile" element={<div>Profile Page</div>} />
+          <Route path="/seller" element={<div>Seller Page</div>} />
+          <Route path="/status" element={<div>Status Page</div>} />
+          <Route path="/aboutus" element={<div>About Us Page</div>} />
         </Routes>
       </Layout>
     </Router>

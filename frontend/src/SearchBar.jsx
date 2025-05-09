@@ -5,7 +5,7 @@ import logo from "./image/hometoplogo.png"; // โลโก้
 import wishlistIcon from "./image/wishlist.png"; // ไอคอน Wish List
 import profileIcon from "./image/profile.png"; // ไอคอน Profile
 
-const Topbar = ({ onSearch }) => {
+const SearchBar = ({ onSearch }) => {
   
   const navigate = useNavigate();
 
@@ -51,4 +51,4 @@ const Topbar = ({ onSearch }) => {
   );
 };
 
-export default Topbar;
+export default SearchBar;
