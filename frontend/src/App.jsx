@@ -7,6 +7,7 @@ import Topbar from "./topbar"; // นำเข้า Topbar
 import AvailableProduct from "./availableproduct";
 import SellerPage from "./sellerpage";
 import ProfileLeft from "./profileleft"; // นำเข้าหน้า ProfileLeft
+import ConfirmPayment from "./confirmpayment";
 
 // คอมโพเนนต์สำหรับแสดง Topbar เฉพาะบางหน้า
 const Layout = ({ children }) => {
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/wishlist" element={<div>Wish List Page</div>} />
           <Route path="/seller" element={<SellerPage />} />
           <Route path="/availableproduct" element={<AvailableProduct />} />
+          <Route path="/confirmpayment" element={<ConfirmPayment />} />
           <Route path="/status" element={<div>Status Page</div>} />
           <Route path="/aboutus" element={<div>About Us Page</div>} />
         </Routes>
