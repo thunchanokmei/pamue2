@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const path = require('path');
 
 const getAllCategories = async (req, res) => {
   try {
@@ -11,23 +12,27 @@ const getAllCategories = async (req, res) => {
   }
 };
 
+
 const addProduct = async (req, res) => {
-  const { name, description, price, imageUrl, condition, saleDate, CategoryID, sellerId } = req.body;
+  const { name, description, price, condition, saleDate, CategoryID, sellerId } = req.body;
 
   try {
-    // เพิ่มสินค้าใหม่ โดยใช้ CategoryID และ sellerId ตรง ๆ
+    // ตรวจสอบว่ามีไฟล์อัปโหลดหรือไม่
+    const imageUrl = req.file ? `http://localhost:5001/uploads/${req.file.filename}` : null;
+
+    // เพิ่มสินค้าใหม่
     const newProduct = await prisma.product.create({
       data: {
         name,
         description,
-        price,
+        price: parseFloat(price),
         imageUrl,
-        condition,
-        saleDate: new Date(saleDate), // แปลง saleDate เป็น Date object
-        sellerId,
-        CategoryID,
+        condition: parseInt(condition, 10),
+        saleDate: new Date(saleDate),
+        sellerId: parseInt(sellerId, 10),
+        CategoryID: parseInt(CategoryID, 10),
         status: 'AVALIABLE',
-      }, 
+      },
     });
 
     res.status(201).json(newProduct);
