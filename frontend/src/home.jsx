@@ -23,8 +23,8 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const url = selectedCategory
-        ? `http://localhost:5001/api/products?categoryId=${selectedCategory}`
-        : "http://localhost:5001/api/products";
+        ? `http://localhost:5001/api/products/products?categoryId=${selectedCategory}`
+        : "http://localhost:5001/api/products/products";
 
       try {
         const response = await fetch(url);

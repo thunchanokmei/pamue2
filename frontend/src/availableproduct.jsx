@@ -8,7 +8,7 @@ const AvailableProduct = () => {
     // ดึงข้อมูลสินค้าที่มีสถานะ AVALIABLE
     const fetchAvailableProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5001/api/products?status=AVALIABLE");
+        const response = await fetch("http://localhost:5001/api/products/status?status=AVALIABLE");
         const data = await response.json();
         setProducts(data);
       } catch (error) {

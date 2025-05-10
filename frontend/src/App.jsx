@@ -9,6 +9,8 @@ import SellerPage from "./sellerpage";
 import WishlistPage from "./wishlistpage";
 import StatusPage from "./statuspage";
 import AboutUsPage from "./aboutuspage";
+import AvailableProduct from "./availableproduct";
+
 
 const App = () => {
   return (
@@ -34,6 +36,7 @@ const AppContent = () => {
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/status" element={<StatusPage />} />
         <Route path="/aboutus" element={<AboutUsPage />} />
+        <Route path="/availableproduct" element={<AvailableProduct />} />
       </Routes>
     </>
   );

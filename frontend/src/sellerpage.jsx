@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // เพิ่ม useNavigate
 import ProfileLeft from "./layout"; // นำเข้า ProfileLeft
 import "./sellerpage.css"; // นำเข้า CSS
 
 const SellerPage = () => {
   const [content, setContent] = useState("< < Seller"); // กำหนดค่าเริ่มต้น
+  const navigate = useNavigate(); // ใช้ useNavigate สำหรับเปลี่ยนเส้นทาง
 
   return (
     <div className="seller-page">
@@ -21,7 +23,8 @@ const SellerPage = () => {
           {content === "สินค้าที่ขายแล้ว" && <p>นี่คือสินค้าที่ขายแล้ว</p>}
         </div>
         <div className="seller-options">
-          <button onClick={() => setContent("สินค้าของฉัน")}>สินค้าของฉัน</button>
+          {/* ปุ่มเปลี่ยนเส้นทางไปยัง AvailableProduct */}
+          <button onClick={() => navigate("/availableproduct")}>สินค้าของฉัน</button>
           <button onClick={() => setContent("สินค้ารอยืนยันการชำระ")}>สินค้ารอยืนยันการชำระ</button>
           <button onClick={() => setContent("สินค้ากำลังจัดส่ง")}>สินค้ากำลังจัดส่ง</button>
           <button onClick={() => setContent("สินค้าที่ขายแล้ว")}>สินค้าที่ขายแล้ว</button>
