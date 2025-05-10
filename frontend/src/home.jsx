@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar"; // นำเข้า SearchBar
 import "./home.css";
 import banner1 from "./image/banner1.jpg"; // นำเข้าภาพแบนเนอร์
@@ -93,11 +94,11 @@ const Home = () => {
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div key={product.ProductID} className="product-card">
-              <img src={product.imageUrl} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
+              <Link to={`/product/${product.ProductID}`}>
+                <img src={product.imageUrl} alt={product.name} />
+                <h3>{product.name}</h3>
+              </Link>
               <p>Price: {product.price} THB</p>
-              <p>Category: {product.category?.name || "No Category"}</p>
               <div className="product-stars">{renderStars(product.condition)}</div>
             </div>
           ))

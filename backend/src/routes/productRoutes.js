@@ -24,5 +24,9 @@ router.get('/products', productController.getProductsByCategory);
 router.get('/id/:id', productController.getProductById);
 router.get('/status', productController.getProductsByStatus);
 router.patch('/status', productController.updateProductStatus);
+router.get('/customer', productController.getCustomerProducts);
+router.post('/addwishlist', productController.addToWishlist);
+router.get('/userwishlist', productController.getWishlistByUser);
+
 
 module.exports = router;

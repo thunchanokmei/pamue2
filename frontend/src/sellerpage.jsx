@@ -9,12 +9,9 @@ const SellerPage = () => {
 
   return (
     <div className="seller-page">
-      {/* ด้านซ้าย: ProfileLeft */}
       <div className="seller-left">
         <ProfileLeft />
       </div>
-
-      {/* ด้านขวา: ข้อมูลที่เปลี่ยนแปลงตามปุ่ม */}
       <div className="seller-right">
         <h2>{content}</h2>
         <div className="seller-options">

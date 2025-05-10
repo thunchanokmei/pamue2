@@ -50,19 +50,19 @@ const getProductById = async (req, res) => {
     const product = await prisma.product.findUnique({
       where: { ProductID: parseInt(id) },
       include: {
-        category: true, // ดึงข้อมูล Category ที่เชื่อมโยง
-        seller: true,   // ดึงข้อมูล User ที่เชื่อมโยง (ถ้ามีฟิลด์ seller)
+        category: true,
+        seller: true,
       },
     });
 
     if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+      return res.status(404).json({ error: "Product not found" });
     }
 
     res.status(200).json(product);
   } catch (error) {
-    console.error('Error fetching product:', error);
-    res.status(500).json({ error: 'Failed to fetch product' });
+    console.error("Error fetching product:", error);
+    res.status(500).json({ error: "Failed to fetch product" });
   }
 };
 
@@ -131,23 +131,93 @@ const getProductsByStatus = async (req, res) => {
 };
 
 const updateProductStatus = async (req, res) => {
-  const { productId, status } = req.body;
+  const { productId, status, paymentDate } = req.body;
 
   try {
-    const product = await prisma.product.findUnique({ where: { ProductID: productId } });
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-
     const updatedProduct = await prisma.product.update({
-      where: { ProductID: productId },
-      data: { status },
+      where: { ProductID: parseInt(productId, 10) },
+      data: {
+        status,
+        paymentDate: paymentDate ? new Date(paymentDate) : undefined,
+      },
     });
 
-    res.status(200).json({ message: 'Product status updated successfully', product: updatedProduct });
+    res.status(200).json({ message: "Product status updated successfully", product: updatedProduct });
   } catch (error) {
-    console.error('Error updating product status:', error);
-    res.status(500).json({ error: 'Failed to update product status' });
+    console.error("Error updating product status:", error);
+    res.status(500).json({ error: "Failed to update product status" });
+  }
+};
+
+const getCustomerProducts = async (req, res) => {
+  const { customerId } = req.query;
+
+  try {
+    if (!customerId || isNaN(parseInt(customerId, 10))) {
+      return res.status(400).json({ error: "Invalid customerId" });
+    }
+
+    const products = await prisma.product.findMany({
+      where: { customerId: parseInt(customerId, 10) },
+      include: {
+        category: true, // ดึงข้อมูลหมวดหมู่
+        seller: true,   // ดึงข้อมูลผู้ขาย
+      },
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching customer products:", error);
+    res.status(500).json({ error: "Failed to fetch customer products" });
+  }
+};
+
+const addToWishlist = async (req, res) => {
+  const { userId, productId } = req.body;
+
+  try {
+    // ลบสินค้าที่ซ้ำกันใน Wishlist
+    await prisma.wishList.deleteMany({
+      where: {
+        UserID: parseInt(userId, 10),
+        ProductID: parseInt(productId, 10),
+      },
+    });
+
+    // เพิ่มสินค้าใหม่ลงใน Wishlist
+    const wishlistItem = await prisma.wishList.create({
+      data: {
+        UserID: parseInt(userId, 10),
+        ProductID: parseInt(productId, 10),
+      },
+    });
+
+    res.status(201).json({ message: "Added to wishlist", wishlistItem });
+  } catch (error) {
+    console.error("Error adding to wishlist:", error);
+    res.status(500).json({ error: "Failed to add to wishlist" });
+  }
+};
+
+const getWishlistByUser = async (req, res) => {
+  const { userId } = req.query;
+
+  try {
+    const wishlistItems = await prisma.wishList.findMany({
+      where: { UserID: parseInt(userId, 10) },
+      include: {
+        product: {
+          include: {
+            seller: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json(wishlistItems);
+  } catch (error) {
+    console.error("Error fetching wishlist:", error);
+    res.status(500).json({ error: "Failed to fetch wishlist" });
   }
 };
 
@@ -159,4 +229,7 @@ module.exports = {
   getProductsByCategory,
   getProductsByStatus,
   updateProductStatus,
+  getCustomerProducts,
+  addToWishlist,
+  getWishlistByUser,
 };

@@ -1,5 +1,20 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const multer = require('multer');
+const path = require('path');
+
+// กำหนดตำแหน่งและชื่อไฟล์สำหรับจัดเก็บรูปภาพ
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../uploads')); // โฟลเดอร์สำหรับเก็บรูปภาพ
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname)); // ชื่อไฟล์ที่ไม่ซ้ำกัน
+  },
+});
+
+const upload = multer({ storage });
 
 const registerUser = async (req, res) => {
   const { name, phone, email, studentCode, address } = req.body;
@@ -61,8 +76,51 @@ const loginUser = async (req, res) => {
     res.status(500).json({ error: 'Failed to login user' });
   }
 };
+
+// ฟังก์ชันสำหรับอัปโหลดรูปภาพและอัปเดต QRurl
+const uploadQRImage = async (req, res) => {
+  const { userId } = req.body;
+
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  try {
+    const qrUrl = `/uploads/${req.file.filename}`; // สร้าง URL ของรูปภาพ
+    const updatedUser = await prisma.user.update({
+      where: { UserID: parseInt(userId, 10) },
+      data: { QRurl: qrUrl },
+    });
+
+    res.status(200).json({ message: 'QR image uploaded successfully', user: updatedUser });
+  } catch (error) {
+    console.error('Error uploading QR image:', error);
+    res.status(500).json({ error: 'Failed to upload QR image' });
+  }
+};
+
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { UserID: parseInt(id, 10) },
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+};
   
 module.exports = {
   loginUser,
   registerUser,
+  uploadQRImage,
+  getUserById,
 };

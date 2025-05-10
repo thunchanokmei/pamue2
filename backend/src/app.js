@@ -10,7 +10,7 @@ const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 app.use('/api/products', productRoutes);
-app.use('/api/user', userRoutes);
+app.use('/api/users', userRoutes);
 app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 
 module.exports = app;

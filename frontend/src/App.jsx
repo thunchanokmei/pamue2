@@ -13,6 +13,8 @@ import ConfirmPayment from "./confirmpayment";
 import DeliveringProduct from "./deliveringproduct"; 
 import UnavailableProduct from "./unavailableproduct"; 
 import ProfilePage from "./profile";
+import ProductDetail from "./productdetail";
+import Checkout from "./checkout"; // นำเข้า Checkout
 
 const App = () => {
   return (
@@ -42,6 +44,8 @@ const AppContent = () => {
         <Route path="/confirmpayment" element={<ConfirmPayment />} /> 
         <Route path="/deliveringproduct" element={<DeliveringProduct />} /> 
         <Route path="/unavailableproduct" element={<UnavailableProduct />} /> 
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </>
   );

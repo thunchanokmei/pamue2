@@ -67,3 +67,20 @@
   .edit-button:hover {
     background-color: #0056b3; /* สีพื้นหลังเมื่อ hover */
   }
+
+  .upload-section {
+    margin-top: 20px;
+  }
+
+  .upload-section input {
+    margin-right: 10px;
+  }
+
+  .qr-image img {
+    margin-top: 20px;
+    width: 150px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
