@@ -10,7 +10,9 @@ import WishlistPage from "./wishlistpage";
 import StatusPage from "./statuspage";
 import AboutUsPage from "./aboutuspage";
 import AvailableProduct from "./availableproduct";
-
+import ConfirmPayment from "./confirmpayment";
+import DeliveringProduct from "./deliveringproduct"; 
+import UnavailableProduct from "./unavailableproduct"; 
 
 const App = () => {
   return (
@@ -37,6 +39,9 @@ const AppContent = () => {
         <Route path="/status" element={<StatusPage />} />
         <Route path="/aboutus" element={<AboutUsPage />} />
         <Route path="/availableproduct" element={<AvailableProduct />} />
+        <Route path="/confirmpayment" element={<ConfirmPayment />} /> 
+        <Route path="/deliveringproduct" element={<DeliveringProduct />} /> 
+        <Route path="/unavailableproduct" element={<UnavailableProduct />} /> 
       </Routes>
     </>
   );

@@ -117,13 +117,37 @@ const getProductsByStatus = async (req, res) => {
   try {
     const products = await prisma.product.findMany({
       where: { status },
-      include: { category: true, seller: true },
+      include: { 
+        category: true, 
+        seller: true, 
+        customer: true },
     });
 
     res.status(200).json(products);
   } catch (error) {
     console.error("Error fetching products by status:", error);
     res.status(500).json({ error: "Failed to fetch products by status" });
+  }
+};
+
+const updateProductStatus = async (req, res) => {
+  const { productId, status } = req.body;
+
+  try {
+    const product = await prisma.product.findUnique({ where: { ProductID: productId } });
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    const updatedProduct = await prisma.product.update({
+      where: { ProductID: productId },
+      data: { status },
+    });
+
+    res.status(200).json({ message: 'Product status updated successfully', product: updatedProduct });
+  } catch (error) {
+    console.error('Error updating product status:', error);
+    res.status(500).json({ error: 'Failed to update product status' });
   }
 };
 
@@ -134,4 +158,5 @@ module.exports = {
   purchaseProduct,
   getProductsByCategory,
   getProductsByStatus,
+  updateProductStatus,
 };

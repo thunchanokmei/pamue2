@@ -29,7 +29,6 @@ const Home = () => {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log("Fetched Products:", data); // ตรวจสอบข้อมูลสินค้า
         setProducts(data);
         setFilteredProducts(data);
       } catch (error) {
@@ -47,6 +46,15 @@ const Home = () => {
     );
     setFilteredProducts(filtered);
   }, [searchQuery, products]);
+
+  // ฟังก์ชันสำหรับแสดงดาวตาม condition
+  const renderStars = (condition) => {
+    const stars = [];
+    for (let i = 0; i < condition; i++) {
+      stars.push(<span key={i} className="star">★</span>);
+    }
+    return stars;
+  };
 
   return (
     <div className="home-container">
@@ -90,6 +98,7 @@ const Home = () => {
               <p>{product.description}</p>
               <p>Price: {product.price} THB</p>
               <p>Category: {product.category?.name || "No Category"}</p>
+              <div className="product-stars">{renderStars(product.condition)}</div>
             </div>
           ))
         ) : (

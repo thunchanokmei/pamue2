@@ -68,3 +68,13 @@ body {
     height: auto; /* ปรับความสูงอัตโนมัติ */
     display: block; /* ป้องกันช่องว่างด้านล่างรูปภาพ */
   }
+
+  .star {
+    color: #ffc107; /* สีเหลือง */
+    font-size: 20px;
+    margin-right: 2px;
+  }
+
+  .product-stars {
+    margin-top: 10px;
+  }
