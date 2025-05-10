@@ -23,14 +23,15 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const url = selectedCategory
-        ? `http://localhost:5001/api/products/products?categoryId=${selectedCategory}`
-        : "http://localhost:5001/api/products/products";
+        ? `http://localhost:5001/api/products?categoryId=${selectedCategory}`
+        : "http://localhost:5001/api/products";
 
       try {
         const response = await fetch(url);
         const data = await response.json();
+        console.log("Fetched Products:", data); // ตรวจสอบข้อมูลสินค้า
         setProducts(data);
-        setFilteredProducts(data); // ตั้งค่าเริ่มต้นให้สินค้าที่กรองแล้วเท่ากับสินค้าทั้งหมด
+        setFilteredProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
