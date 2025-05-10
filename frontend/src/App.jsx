@@ -4,7 +4,6 @@ import Topbar from "./topbar"; // นำเข้า Topbar
 import Login from "./login";
 import Register from "./register";
 import Home from "./home";
-import ProfileLeft from "./layout";
 import SellerPage from "./sellerpage";
 import WishlistPage from "./wishlistpage";
 import StatusPage from "./statuspage";
@@ -13,6 +12,7 @@ import AvailableProduct from "./availableproduct";
 import ConfirmPayment from "./confirmpayment";
 import DeliveringProduct from "./deliveringproduct"; 
 import UnavailableProduct from "./unavailableproduct"; 
+import ProfilePage from "./profile";
 
 const App = () => {
   return (
@@ -33,7 +33,7 @@ const AppContent = () => {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<ProfileLeft />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/seller" element={<SellerPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/status" element={<StatusPage />} />

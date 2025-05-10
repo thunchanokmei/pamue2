@@ -1,0 +1,69 @@
+.profile-page {
+    display: flex;
+    height: 100vh; /* ให้เต็มความสูงของหน้าจอ */
+    background-color: #ffffff; /* สีพื้นหลัง */}
+  
+  .profile-left {
+    position: fixed;
+    width: 30%; /* กำหนดความกว้างของด้านซ้าย */
+    height: 100vh; /* ให้เต็มความสูงของหน้าจอ */
+    background-color: #ffffff; /* สีพื้นหลังของด้านซ้าย */
+    overflow-y: auto; /* เพิ่ม scroll หากเนื้อหาเกิน */
+  }
+  
+  
+  .profile-right h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #000000;
+    padding-left: 100px;
+    margin-top: 120px;
+  }
+  
+
+  .profile-right {
+    margin-left: 30%; /* เว้นพื้นที่ด้านซ้ายสำหรับ ProfileLeft */
+    width: 60%; /* กำหนดความกว้างของด้านขวา */
+    height: 75vh;
+    padding: 20px;
+    overflow-y: auto; /* เพิ่ม scroll หากเนื้อหาเกิน */
+    border: 1px solid #dcdcdc !important; /* เพิ่มกรอบ */
+    border-radius: 50px; /* มุมโค้ง */
+    background-color: #ffffff; /* สีพื้นหลัง */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+    margin-top: 160px; /* ระยะห่างจากด้านบน */
+    margin-left: 485px;
+
+  }
+  
+  .profile-content p {
+    font-size: 24px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    margin-top: 30px;
+  }
+  
+  .profile-content p strong {
+    color: #000000; /* สีข้อความหัวข้อ */
+    padding-left: 100px;
+  }
+  .edit-box {
+    position: absolute; /* วางตำแหน่งแบบ absolute */
+    top: 30%; /* ระยะห่างจากด้านบน */
+    right: 15%; /* ระยะห่างจากด้านขวา */
+  }
+  
+  .edit-button {
+    background-color: #ffee00; /* สีพื้นหลัง */
+    color: #000000; /* สีข้อความ */
+    border: 1px solid #afa300; /* ไม่มีเส้นขอบ */
+    border-radius: 10px; /* มุมโค้ง */
+    padding: 10px 15px; /* ระยะห่างภายใน */
+    font-size: 14px; /* ขนาดตัวอักษร */
+    cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อ hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
+  }
+  
+  .edit-button:hover {
+    background-color: #0056b3; /* สีพื้นหลังเมื่อ hover */
+  }
