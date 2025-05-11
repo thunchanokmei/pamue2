@@ -12,15 +12,18 @@ const ProfilePage = () => {
     // หากไม่มีข้อมูลใน location.state ให้ดึงข้อมูลจาก API หรือ localStorage
     if (!userData.UserID) {
       const fetchUserData = async () => {
-        try {
-          const response = await fetch("http://localhost:5001/api/users/1"); // ดึงข้อมูลผู้ใช้จาก API
-          const data = await response.json();
-          setUserData(data);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
+    try {
+      const response = await fetch("http://localhost:5001/api/users/profile", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         }
-      };
-
+      });
+      const data = await response.json();
+      setUserData(data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
       fetchUserData();
     }
   }, [userData]);
@@ -36,7 +39,7 @@ const ProfilePage = () => {
     }
 
     const formData = new FormData();
-    formData.append("qrImage", selectedFile);
+    formData.append("qrImage", selectedFile); 
     formData.append("userId", userData.UserID);
 
     try {

@@ -50,6 +50,17 @@ const registerUser = async (req, res) => {
   }
 };
 
+const jwt = require('jsonwebtoken');
+function verifyToken(req, res, next) {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, 'secret-key', (err, decoded) => {
+    if (err) return res.sendStatus(403);
+    req.user = decoded;
+    next();
+  });
+}
 
 const loginUser = async (req, res) => {
   const { email, studentCode } = req.body;
@@ -69,6 +80,8 @@ const loginUser = async (req, res) => {
       return res.status(401).json({ error: 'Invalid student code' });
     }
 
+    const token = jwt.sign({ userId: user.UserID }, 'secret-key', { expiresIn: '1h' });
+
     // ส่งข้อมูลผู้ใช้กลับไป (สามารถเพิ่ม token ได้ในอนาคต)
     res.status(200).json({ message: 'Login successful', user });
   } catch (error) {
@@ -86,7 +99,7 @@ const uploadQRImage = async (req, res) => {
   }
 
   try {
-    const qrUrl = `/uploads/${req.file.filename}`; // สร้าง URL ของรูปภาพ
+    const qrUrl = `/uploads/${req.file.filename}`;
     const updatedUser = await prisma.user.update({
       where: { UserID: parseInt(userId, 10) },
       data: { QRurl: qrUrl },
@@ -101,7 +114,8 @@ const uploadQRImage = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const { id } = req.params;
-
+  if (!id) return res.status(400).json({ error: "Missing ID parameter" });
+  
   try {
     const user = await prisma.user.findUnique({
       where: { UserID: parseInt(id, 10) },
@@ -117,10 +131,11 @@ const getUserById = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch user" });
   }
 };
-  
+
 module.exports = {
   loginUser,
   registerUser,
   uploadQRImage,
   getUserById,
+  verifyToken,
 };

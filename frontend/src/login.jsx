@@ -32,6 +32,7 @@ const Login = () => {
       if (response.ok) {
         alert("Login successful!");
         console.log("User logged in:", result);
+        localStorage.setItem("token", result.token);
 
         // ส่งชื่อผู้ใช้ไปยังหน้า Profile
         const username = result.username || "Guest"; // รับชื่อผู้ใช้จาก backend หรือใช้ "Guest" เป็นค่าเริ่มต้น
