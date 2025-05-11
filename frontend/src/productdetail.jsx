@@ -13,6 +13,8 @@ const ProductDetail = () => {
         const response = await fetch(`http://localhost:5001/api/products/id/${id}`);
         const data = await response.json();
         setProduct(data);
+        console.log("Product data:", data);
+        console.log("Product ID:", id);
       } catch (error) {
         console.error("Error fetching product details:", error);
       }
@@ -44,7 +46,7 @@ const ProductDetail = () => {
   };
 
   const handleBuyNow = () => {
-    navigate(`/checkout/${product.ProductID}`);
+    navigate(`/checkout/${id}`);
   };
 
   const renderStars = (condition) => {

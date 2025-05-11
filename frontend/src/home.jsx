@@ -20,12 +20,12 @@ const Home = () => {
       .catch((error) => console.error("Error fetching categories:", error));
   }, []);
 
-  // ดึงข้อมูลสินค้า
+  // ดึงข้อมูลสินค้าเฉพาะที่มีสถานะ AVALIABLE
   useEffect(() => {
     const fetchProducts = async () => {
       const url = selectedCategory
-        ? `http://localhost:5001/api/products/products?categoryId=${selectedCategory}`
-        : "http://localhost:5001/api/products/products";
+        ? `http://localhost:5001/api/products/products?categoryId=${selectedCategory}&status=AVALIABLE`
+        : "http://localhost:5001/api/products/products?status=AVALIABLE";
 
       try {
         const response = await fetch(url);
@@ -62,14 +62,14 @@ const Home = () => {
       {/* ใช้ SearchBar แทน Topbar */}
       <SearchBar onSearch={setSearchQuery} />
       {/* ส่วนแสดงแบนเนอร์ */}
-    <div className="banners">
-      <div className="banner1">
-        <img src={banner1} alt="Banner 1" />
+      <div className="banners">
+        <div className="banner1">
+          <img src={banner1} alt="Banner 1" />
+        </div>
+        <div className="banner2">
+          <img src={banner2} alt="Banner 2" />
+        </div>
       </div>
-      <div className="banner2">
-        <img src={banner2} alt="Banner 2" />
-      </div>
-    </div>
       {/* ส่วนแสดงปุ่ม Category */}
       <div className="categories">
         <button

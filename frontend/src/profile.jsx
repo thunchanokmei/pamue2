@@ -9,22 +9,12 @@ const ProfilePage = () => {
   const [selectedFile, setSelectedFile] = useState();
 
   useEffect(() => {
-    // หากไม่มีข้อมูลใน location.state ให้ดึงข้อมูลจาก API หรือ localStorage
+    // หากไม่มีข้อมูลใน location.state ให้ดึงข้อมูลจาก Local Storage
     if (!userData.UserID) {
-      const fetchUserData = async () => {
-    try {
-      const response = await fetch("http://localhost:5001/api/users/profile", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      });
-      const data = await response.json();
-      setUserData(data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-      fetchUserData();
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUserData(JSON.parse(storedUser));
+      }
     }
   }, [userData]);
 
@@ -85,7 +75,7 @@ const ProfilePage = () => {
           {userData.QRurl && (
             <div className="qr-image">
               <h3>Uploaded QR Code:</h3>
-              <img src={`http://localhost:5001${userData.QRurl}`} alt="QR Code" />
+              <img src={`${userData.QRurl}`} alt="QR Code" />
             </div>
           )}
         </div>

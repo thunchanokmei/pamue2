@@ -5,10 +5,22 @@ import "./checkout.css";
 const Checkout = () => {
   const { id } = useParams(); // ดึง ProductID จาก URL
   const navigate = useNavigate();
-  const [product, setProduct] = useState(null);
+  const [user, setUser] = useState(null); // เก็บข้อมูลผู้ใช้
+  const [product, setProduct] = useState(null); // เก็บข้อมูลสินค้า
   const [paymentTime, setPaymentTime] = useState(""); // เวลาชำระเงิน
-  const [,setIsPaymentConfirmed] = useState(false); // สถานะการกรอกเวลา
 
+  // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      alert("กรุณาล็อกอินก่อนทำรายการ");
+      navigate("/login"); // เปลี่ยนไปหน้า login
+    }
+  }, [navigate]);
+
+  // ดึงข้อมูลสินค้า
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -23,11 +35,12 @@ const Checkout = () => {
     fetchProduct();
   }, [id]);
 
+  // อัปเดตเวลาชำระเงิน
   const handlePaymentTimeChange = (e) => {
     setPaymentTime(e.target.value);
-    setIsPaymentConfirmed(false); // รีเซ็ตสถานะปุ่มยืนยัน
   };
 
+  // ยืนยันการชำระเงิน
   const handleConfirmPayment = async () => {
     if (!paymentTime) {
       alert("กรุณากรอกเวลาชำระเงินก่อน");
@@ -44,9 +57,12 @@ const Checkout = () => {
           productId: product.ProductID,
           status: "PAYMENT_CONFIRMATION",
           paymentDate: paymentTime,
+          customerId: user.UserID, // ใช้ UserID จากข้อมูลผู้ใช้
         }),
       });
 
+      console.log("Response:", response);
+      console.log("UserID:", user.UserID);
       if (response.ok) {
         alert("ยืนยันการชำระเงินสำเร็จ!");
         navigate("/status"); // เปลี่ยนไปยังหน้า StatusPage
@@ -58,6 +74,7 @@ const Checkout = () => {
     }
   };
 
+  // แสดงดาวตามคุณภาพสินค้า
   const renderStars = (condition) => {
     const stars = [];
     for (let i = 0; i < condition; i++) {
@@ -66,6 +83,7 @@ const Checkout = () => {
     return stars;
   };
 
+  // หากยังโหลดข้อมูลสินค้าไม่เสร็จ
   if (!product) {
     return <p>Loading...</p>;
   }
@@ -82,7 +100,7 @@ const Checkout = () => {
         <p>Sale Date: {new Date(product.saleDate).toLocaleDateString()}</p>
       </div>
       <div className="checkout-right">
-        <img src={`http://localhost:5001${product.seller?.QRurl}`} alt="QR Code" className="qr-code" />
+        <img src={`${product.seller?.QRurl}`} alt="QR Code" className="qr-code" />
         <div className="payment-section">
           <input
             type="datetime-local"

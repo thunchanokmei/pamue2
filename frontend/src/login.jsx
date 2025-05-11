@@ -32,11 +32,12 @@ const Login = () => {
       if (response.ok) {
         alert("Login successful!");
         console.log("User logged in:", result);
+        localStorage.setItem("user", JSON.stringify(result.user));
         localStorage.setItem("token", result.token);
 
         // ส่งชื่อผู้ใช้ไปยังหน้า Profile
         const username = result.username || "Guest"; // รับชื่อผู้ใช้จาก backend หรือใช้ "Guest" เป็นค่าเริ่มต้น
-        navigate("/profile", { state: { username } }); // เปลี่ยนหน้าไปยัง Profile พร้อมส่งชื่อผู้ใช้
+        navigate("/home", { state: { username } }); // เปลี่ยนหน้าไปยัง Profile พร้อมส่งชื่อผู้ใช้
       } else {
         alert(`Error: ${result.error}`);
         console.error("Login failed:", result.error);

@@ -1,6 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const path = require('path');
 
 const getAllCategories = async (req, res) => {
   try {
@@ -92,22 +91,21 @@ const purchaseProduct = async (req, res) => {
 };
 
 const getProductsByCategory = async (req, res) => {
-  const { categoryId } = req.query;
+  const { categoryId, status } = req.query;
 
   try {
-    const products = categoryId
-      ? await prisma.product.findMany({
-          where: { CategoryID: parseInt(categoryId) },
-          include: { category: true, seller: true },
-        })
-      : await prisma.product.findMany({
-          include: { category: true, seller: true },
-        });
+    const products = await prisma.product.findMany({
+      where: {
+        ...(categoryId && { CategoryID: parseInt(categoryId, 10) }),
+        ...(status && { status }),
+      },
+      include: { category: true, seller: true },
+    });
 
     res.status(200).json(products);
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).json({ error: 'Failed to fetch products' });
+    console.error("Error fetching products:", error);
+    res.status(500).json({ error: "Failed to fetch products" });
   }
 };
 
@@ -131,7 +129,7 @@ const getProductsByStatus = async (req, res) => {
 };
 
 const updateProductStatus = async (req, res) => {
-  const { productId, status, paymentDate } = req.body;
+  const { productId, status, paymentDate, customerId } = req.body;
 
   try {
     const updatedProduct = await prisma.product.update({
@@ -139,6 +137,7 @@ const updateProductStatus = async (req, res) => {
       data: {
         status,
         paymentDate: paymentDate ? new Date(paymentDate) : undefined,
+        customerId: customerId ? parseInt(customerId, 10) : undefined, // อัปเดต customerId ด้วย
       },
     });
 
@@ -220,6 +219,7 @@ const getWishlistByUser = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch wishlist" });
   }
 };
+
 
 module.exports = {
   getAllCategories,

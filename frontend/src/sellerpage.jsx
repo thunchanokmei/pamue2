@@ -19,7 +19,7 @@ const SellerPage = () => {
           <button onClick={() => navigate("/availableproduct")}>สินค้าของฉัน</button>
           <button onClick={() => navigate("/confirmpayment")}>สินค้ารอยืนยันการชำระ</button>
           <button onClick={() => navigate("/deliveringproduct")}>สินค้ากำลังจัดส่ง</button>
-          <button onClick={() => navigate("/unavailableproduct")}>สินค้าที่ขายแล้ว</button>
+          <button onClick={() => navigate("/completed")}>สินค้าที่ขายแล้ว</button>
         </div>
       </div>
     </div>

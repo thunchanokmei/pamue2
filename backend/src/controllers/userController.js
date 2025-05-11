@@ -1,20 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const multer = require('multer');
-const path = require('path');
-
-// กำหนดตำแหน่งและชื่อไฟล์สำหรับจัดเก็บรูปภาพ
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../uploads')); // โฟลเดอร์สำหรับเก็บรูปภาพ
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname)); // ชื่อไฟล์ที่ไม่ซ้ำกัน
-  },
-});
-
-const upload = multer({ storage });
 
 const registerUser = async (req, res) => {
   const { name, phone, email, studentCode, address } = req.body;
@@ -94,12 +79,15 @@ const loginUser = async (req, res) => {
 const uploadQRImage = async (req, res) => {
   const { userId } = req.body;
 
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
-
   try {
-    const qrUrl = `/uploads/${req.file.filename}`;
+    // ตรวจสอบว่ามีไฟล์อัปโหลดหรือไม่
+    const qrUrl = req.file ? `http://localhost:5001/uploads/${req.file.filename}` : null;
+
+    if (!qrUrl) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    // อัปเดต QRurl ในฐานข้อมูล
     const updatedUser = await prisma.user.update({
       where: { UserID: parseInt(userId, 10) },
       data: { QRurl: qrUrl },
@@ -132,10 +120,68 @@ const getUserById = async (req, res) => {
   }
 };
 
+const getUserAvailableProducts = async (req, res) => {
+  const { userId } = req.query;
+
+  try {
+    // ตรวจสอบว่า userId ถูกส่งมาหรือไม่
+    if (!userId || isNaN(parseInt(userId, 10))) {
+      return res.status(400).json({ error: "Invalid or missing userId" });
+    }
+
+    // ดึงสินค้าที่เป็นของผู้ใช้และมีสถานะ AVALIABLE
+    const products = await prisma.product.findMany({
+      where: {
+        sellerId: parseInt(userId, 10),
+        status: "AVALIABLE",
+      },
+      include: {
+        category: true, // ดึงข้อมูลหมวดหมู่
+        seller: true,   // ดึงข้อมูลผู้ขาย
+      },
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching user available products:", error);
+    res.status(500).json({ error: "Failed to fetch user available products" });
+  }
+};
+
+const getUserProductsByStatus = async (req, res) => {
+  const { userId, status } = req.query;
+
+  try {
+    // ตรวจสอบว่า userId และ status ถูกส่งมาหรือไม่
+    if (!userId || isNaN(parseInt(userId, 10)) || !status) {
+      return res.status(400).json({ error: "Invalid or missing parameters" });
+    }
+
+    // ดึงสินค้าของผู้ใช้ตามสถานะ
+    const products = await prisma.product.findMany({
+      where: {
+        sellerId: parseInt(userId, 10),
+        status: status,
+      },
+      include: {
+        category: true, // ดึงข้อมูลหมวดหมู่
+        customer: true, // ดึงข้อมูลลูกค้า
+      },
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching user products by status:", error);
+    res.status(500).json({ error: "Failed to fetch user products by status" });
+  }
+};
+
 module.exports = {
   loginUser,
   registerUser,
   uploadQRImage,
   getUserById,
   verifyToken,
+  getUserAvailableProducts,
+  getUserProductsByStatus,
 };

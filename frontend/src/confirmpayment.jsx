@@ -1,23 +1,32 @@
 import React, { useState, useEffect } from "react";
+import ProfileLeft from "./layout";
 import "./confirmpayment.css";
 
 const ConfirmPayment = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchPaymentConfirmationProducts = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:5001/api/products/status?status=PAYMENT_CONFIRMATION"
-        );
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching payment confirmation products:", error);
-      }
-    };
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
 
-    fetchPaymentConfirmationProducts();
+      const fetchPaymentConfirmationProducts = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:5001/api/users/products/status?userId=${user.UserID}&status=PAYMENT_CONFIRMATION`
+          );
+          const data = await response.json();
+          setProducts(data);
+        } catch (error) {
+          console.error("Error fetching payment confirmation products:", error);
+        }
+      };
+
+      fetchPaymentConfirmationProducts();
+    } else {
+      alert("กรุณาล็อกอินก่อน");
+      window.location.href = "/login";
+    }
   }, []);
 
   const handleConfirmOrder = async (productId) => {
@@ -44,52 +53,37 @@ const ConfirmPayment = () => {
     }
   };
 
-  // ฟังก์ชันสำหรับแสดงดาวตาม condition
-  const renderStars = (condition) => {
-    const stars = [];
-    for (let i = 0; i < condition; i++) {
-      stars.push(<span key={i} className="star">★</span>);
-    }
-    return stars;
-  };
-
   return (
-    <div className="confirm-payment-container">
-      <h2>สินค้ารอยืนยันการชำระ</h2>
-      <div className="product-list">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <div key={product.ProductID} className="product-card">
-              <img
-                src={product.imageUrl || "https://via.placeholder.com/150"}
-                alt={product.name}
-                className="product-image"
-              />
-              <h3>{product.name}</h3>
-              <p>Price: {product.price} THB</p>
-              <p>Condition: {renderStars(product.condition)}</p>
-              <div className="customer-info">
-                <p>
-                  <strong>Customer Name:</strong> {product.customer?.name || "N/A"}
-                </p>
-                <p>
-                  <strong>Phone:</strong> {product.customer?.phone || "N/A"}
-                </p>
-                <p>
-                  <strong>Address:</strong> {product.customer?.address || "N/A"}
-                </p>
+    <div className="page-wrapper">
+      <ProfileLeft />
+      <div className="product-page">
+        <h2>สินค้ารอยืนยันการชำระ</h2>
+        <div className="product-grid">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div key={product.ProductID} className="product-card">
+                <img
+                  src={`${product.imageUrl}`}
+                  alt={product.name}
+                  className="product-image"
+                />
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p className="price">{product.price} บาท</p>
+                  <button
+                    className="confirm-button"
+                    onClick={() => handleConfirmOrder(product.ProductID)}
+                  >
+                    ยืนยันคำสั่งซื้อ
+                  </button>
+                </div>
               </div>
-              <button
-                className="confirm-button"
-                onClick={() => handleConfirmOrder(product.ProductID)}
-              >
-                ยืนยันคำสั่งซื้อ
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>ไม่มีสินค้ารอยืนยันการชำระ</p>
-        )}
+            ))
+          ) : (
+            <p>ไม่มีสินค้ารอยืนยันการชำระ</p>
+          )}
+        </div>
       </div>
     </div>
   );

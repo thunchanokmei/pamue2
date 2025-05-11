@@ -11,7 +11,7 @@ import AboutUsPage from "./aboutuspage";
 import AvailableProduct from "./availableproduct";
 import ConfirmPayment from "./confirmpayment";
 import DeliveringProduct from "./deliveringproduct"; 
-import UnavailableProduct from "./unavailableproduct"; 
+import CompletePage from "./completedpage"; 
 import ProfilePage from "./profile";
 import ProductDetail from "./productdetail";
 import Checkout from "./checkout"; // นำเข้า Checkout
@@ -43,9 +43,9 @@ const AppContent = () => {
         <Route path="/availableproduct" element={<AvailableProduct />} />
         <Route path="/confirmpayment" element={<ConfirmPayment />} /> 
         <Route path="/deliveringproduct" element={<DeliveringProduct />} /> 
-        <Route path="/unavailableproduct" element={<UnavailableProduct />} /> 
+        <Route path="/completed" element={<CompletePage />} /> 
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout/:id" element={<Checkout />} />
       </Routes>
     </>
   );

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ProfileLeft from "./layout";
-import "./deliveringproduct.css";
+import ProfileLeft from "./layout"; // Sidebar ด้านซ้าย
+import "./completedpage.css"; // สไตล์ของหน้า
 
-const DeliveringProduct = () => {
+const CompletedPage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -10,22 +10,22 @@ const DeliveringProduct = () => {
     if (storedUser) {
       const user = JSON.parse(storedUser);
 
-      const fetchDeliveringProducts = async () => {
+      const fetchCompletedProducts = async () => {
         try {
           const response = await fetch(
-            `http://localhost:5001/api/users/products/status?userId=${user.UserID}&status=DELIVERING`
+            `http://localhost:5001/api/users/products/status?userId=${user.UserID}&status=COMPLETED`
           );
           const data = await response.json();
           setProducts(data);
         } catch (error) {
-          console.error("Error fetching delivering products:", error);
+          console.error("Error fetching completed products:", error);
         }
       };
 
-      fetchDeliveringProducts();
+      fetchCompletedProducts();
     } else {
       alert("กรุณาล็อกอินก่อน");
-      window.location.href = "/login";
+      window.location.href = "/login"; // เปลี่ยนไปหน้า login หากไม่ได้ล็อกอิน
     }
   }, []);
 
@@ -33,7 +33,7 @@ const DeliveringProduct = () => {
     <div className="page-wrapper">
       <ProfileLeft />
       <div className="product-page">
-        <h2>สินค้ากำลังจัดส่ง</h2>
+        <h2>สินค้าที่ขายแล้ว</h2>
         <div className="product-grid">
           {products.length > 0 ? (
             products.map((product) => (
@@ -51,7 +51,7 @@ const DeliveringProduct = () => {
               </div>
             ))
           ) : (
-            <p>ไม่มีสินค้ากำลังจัดส่ง</p>
+            <p>ไม่มีสินค้าที่ขายแล้ว</p>
           )}
         </div>
       </div>
@@ -59,4 +59,4 @@ const DeliveringProduct = () => {
   );
 };
 
-export default DeliveringProduct;
+export default CompletedPage;

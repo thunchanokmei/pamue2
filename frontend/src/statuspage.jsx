@@ -5,19 +5,27 @@ const StatusPage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const userId = 1
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
 
-    const fetchCustomerProducts = async () => {
-      try {
-        const response = await fetch(`http://localhost:5001/api/products/customer?customerId=${userId}`);
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching customer products:", error);
-      }
-    };
+      const fetchCustomerProducts = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:5001/api/products/customer?customerId=${user.UserID}`
+          );
+          const data = await response.json();
+          setProducts(data);
+        } catch (error) {
+          console.error("Error fetching customer products:", error);
+        }
+      };
 
-    fetchCustomerProducts();
+      fetchCustomerProducts();
+    } else {
+      alert("กรุณาล็อกอินก่อน");
+      window.location.href = "/login"; // เปลี่ยนไปหน้า login หากไม่ได้ล็อกอิน
+    }
   }, []);
 
   const handleStatusChange = async (productId) => {
