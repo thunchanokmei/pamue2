@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import ProfileLeft from "./layout"; // Sidebar ด้านซ้าย
 import "./unavailableproduct.css";
 
-const UnavailableProduct = () => {
+const UnavailablePage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -21,21 +22,24 @@ const UnavailableProduct = () => {
   }, []);
 
   return (
-    <div className="unavailable-product-container">
-      <h2>สินค้าที่ขายแล้ว</h2>
-      <div className="product-list">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <div key={product.ProductID} className="product-card">
-              <h3>{product.name}</h3>
-            </div>
-          ))
-        ) : (
-          <p>ไม่มีสินค้าที่ขายแล้ว</p>
-        )}
+    <div style={{ display: "flex", minHeight: "100vh" }}>
+      <ProfileLeft />
+      <div className="unavailable-product-container">
+        <h2>สินค้าที่ขายแล้ว</h2>
+        <div className="product-list">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div key={product.ProductID} className="product-card">
+                <h3>{product.name}</h3>
+              </div>
+            ))
+          ) : (
+            <p>ไม่มีสินค้าที่ขายแล้ว</p>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default UnavailableProduct;
+export default UnavailablePage;

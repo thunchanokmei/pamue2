@@ -42,7 +42,7 @@ body {
   
   .product-card img {
     max-width: 100%;
-    height: auto;
+    max-height: 150vh;
     border-radius: 5px;
   }
   /* ส่วนแสดงแบนเนอร์ */

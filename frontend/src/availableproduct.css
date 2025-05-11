@@ -1,122 +1,141 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 
 body {
+  margin: 0;
   font-family: 'Kanit', sans-serif;
   background-color: #f2f2f2;
-  margin: 0;
-  padding: 0;
 }
 
-.available-product-container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 24px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.page-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.product-page {
+  flex: 1;
+  padding: 40px 60px;
+  background-color: #f9f9fb;
 }
 
 h2 {
   color: #1a73e8;
   margin-bottom: 20px;
+  margin-top: 200px;
+  margin-left: 400px;
 }
 
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 40px;
+/* ================== Product Grid ================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+  margin-left: 420px;
+  border-radius: 50px;
+  height: 30vh;
 }
 
 .product-card {
-  background: white;
+  background: #fff;
   border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  padding: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
   width: 100%;
-  text-align: center;
+  height: 200px;
+  object-fit: cover;
 }
 
-.product-card img {
-  max-width: 150px;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 10px;
+.product-info {
+  padding: 16px 20px;
 }
 
-.add-product-form {
+.product-info h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.product-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.product-info .price {
+  font-weight: bold;
+  color: #1a73e8;
+}
+
+/* ================== Product Form ================== */
+.product-form {
+  background: #ffffff;
+  width: 65%;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: #fdfdfd;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+  margin-left: 420px;
+  margin-top: 20px;
+
 }
 
-.add-product-form input,
-.add-product-form textarea,
-.add-product-form select {
+.product-form input,
+.product-form textarea,
+.product-form select {
   padding: 12px 14px;
+  font-size: 16px;
   border-radius: 12px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-family: 'Kanit', sans-serif;
 }
 
-.add-product-form textarea {
-  resize: vertical;
+.product-form textarea {
   min-height: 80px;
+  resize: vertical;
 }
 
-.add-product-form select {
-  background-color: white;
-}
-
-.star-rating {
+/* ================== Buttons ================== */
+.form-buttons {
   display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 20px;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
-.star-rating option {
-  font-size: 20px;
-}
-
-.button-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.button-reset {
-  background-color: #ffeb3b;
-  color: #333;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.button-reset:hover {
-  background-color: #fdd835;
-}
-
-.button-submit {
+.btn-submit {
   background-color: #1a73e8;
   color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-size: 16px;
   font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.button-submit:hover {
+.btn-submit:hover {
   background-color: #0d47a1;
+}
+
+.btn-reset {
+  background-color: #e0e0e0;
+  color: #333;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-reset:hover {
+  background-color: #ccc;
 }
