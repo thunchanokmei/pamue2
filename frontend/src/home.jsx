@@ -90,15 +90,15 @@ const Home = () => {
       </div>
 
       {/* ส่วนแสดงสินค้า */}
-      <div className="products">
+      <div className="products-home">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
-            <div key={product.ProductID} className="product-card">
+            <div key={product.ProductID} className="product-card-home">
               <Link to={`/product/${product.ProductID}`}>
                 <img src={product.imageUrl} alt={product.name} />
                 <h3>{product.name}</h3>
               </Link>
-              <p>Price: {product.price} THB</p>
+              <p1>{product.price} THB</p1>
               <div className="product-stars">{renderStars(product.condition)}</div>
             </div>
           ))

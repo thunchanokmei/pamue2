@@ -63,7 +63,7 @@ const ConfirmPayment = () => {
             products.map((product) => (
               <div key={product.ProductID} className="product-card">
                 <img
-                  src={`${product.imageUrl}`}
+                  src={product.imageUrl}
                   alt={product.name}
                   className="product-image"
                 />

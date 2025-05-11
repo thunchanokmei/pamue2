@@ -13,10 +13,6 @@ const ProfileLeft = () => {
   const location = useLocation();
   const username = location.state?.username || "Guest"; // รับชื่อผู้ใช้จาก state หรือใช้ "Guest" เป็นค่าเริ่มต้น
 
-  const handleUpload = () => {
-    alert("Upload button clicked!"); // เพิ่มฟังก์ชันสำหรับการอัปโหลด
-  };
-
   return (
     <div className="profile-left">
       {/* กรอบรวมรูปภาพและปุ่มเมนู */}
@@ -29,9 +25,6 @@ const ProfileLeft = () => {
             className="profile-image"
           />
           <p className="profile-name">{username}</p> {/* แสดงชื่อผู้ใช้ */}
-          <button className="upload-button" onClick={handleUpload}>
-            Upload Image
-          </button>
         </div>
 
         {/* ปุ่มเมนู */}

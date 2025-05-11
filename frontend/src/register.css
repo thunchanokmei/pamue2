@@ -3,7 +3,7 @@ hyml,body {
     padding: 0;
     height: 100%;
 }
-body {
+body{
     background-image: url('image/background.jpg');
     background-size: cover;
     background-position: center;
@@ -11,17 +11,20 @@ body {
     font-family: 'kanit',sans-serif;
 }
 .form-container-register {
-    max-width: 400px;
+    width: 500px;
+    max-height: fit-content;
     margin: 0 auto;
     padding: 200px;
     margin-top: 100px;
-
 }
   
   .form-container-register h2 {
-    text-align: center;
+    text-align: center !important;
     color: #ffffff;
     font-family: 'kanit',sans-serif;
+    margin-left: 0%;
+    margin-top: 0%;
+
   }
   .form-container-register{
     border: 1px solid #0010ec; 

@@ -16,7 +16,7 @@
   height: 75vh; /* กำหนดความสูงของด้านขวา */
   overflow-y: auto; /* เพิ่ม scroll หากเนื้อหาเกิน */
   margin-top: 180px;
-  margin-left: 500px;
+  margin-left: 35%;
   border:1px solid #ffffff;
   border-radius: 50px;
   background-color: rgb(237, 237, 237);

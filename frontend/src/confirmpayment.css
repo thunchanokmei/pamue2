@@ -1,58 +1,87 @@
-.confirm-payment-container {
-  padding: 120px 20px 20px; /* เว้นระยะจาก Topbar */
+.page-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f4f4;
 }
 
-.product-list {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
+.product-page {
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding-top: 0px;
+  padding: 40px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  max-width: 880px;
+  margin-top: 12%;
+  margin-left: 32%;
+  height: 70vh;
+
+}
+
+.product-page h2 {
+  display: block;
+  width: 100%;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-left: 0%;
+  padding: 0 0 0 20px;
+  color: #007aff;
+  text-align: left!important;
+  padding-left: 0%!important;
+}
+.product-grid {
+  background-color: #ffffff;
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-left: 0%;
 }
 
 .product-card {
   border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  width: 220px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .product-image {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 140px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 10px;
 }
 
-.customer-info {
-  margin-top: 10px;
-  text-align: left;
-  width: 100%;
+.product-info h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
 }
 
-.customer-info p {
-  margin: 5px 0;
+.product-info p {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+}
+
+.price {
+  font-weight: bold;
+  color: #e91e63;
 }
 
 .confirm-button {
-  padding: 10px 20px;
-  background-color: #0479ff;
+  padding: 8px 16px;
+  background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
+  transition: 0.2s ease;
 }
 
 .confirm-button:hover {
-  background-color: #0056b3;
-}
-
-.star {
-  color: #ffc107; /* สีเหลือง */
-  font-size: 20px;
-  margin-right: 2px;
+  background-color: #218838;
 }

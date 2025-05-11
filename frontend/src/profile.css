@@ -2,14 +2,14 @@
 .profile-page {
     display: flex;
     height: 100vh;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
   }
   
   .profile-left {
     position: fixed;
     width: 30%;
     height: 100vh;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     overflow-y: auto;
   }
   
@@ -18,7 +18,7 @@
     margin-bottom: 20px;
     color: #000000;
     padding-left: 100px;
-    margin-top: 120px;
+    margin-top: 5%;
   }
   
   .profile-right {
@@ -31,42 +31,22 @@
     border-radius: 50px;
     background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 160px;
-    margin-left: 485px;
+    margin-top: 10%;
+    margin-left: 34%;
   }
   
   .profile-content p {
     font-size: 24px;
     line-height: 1.6;
     margin-bottom: 15px;
-    margin-top: 30px;
+    margin-top: 3%;
   }
   
   .profile-content p strong {
     color: #000000;
     padding-left: 100px;
   }
-  
-  .edit-box {
-    position: absolute;
-    top: 30%;
-    right: 15%;
-  }
-  
-  .edit-button {
-    background-color: #ffee00;
-    color: #000000;
-    border: 1px solid #afa300;
-    border-radius: 10px;
-    padding: 10px 15px;
-    font-size: 14px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .edit-button:hover {
-    background-color: #0056b3;
-  }
+
   
   .upload-section {
     margin-top: 20px;

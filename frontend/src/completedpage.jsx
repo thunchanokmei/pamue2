@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ProfileLeft from "./layout"; // Sidebar ด้านซ้าย
-import "./completedpage.css"; // สไตล์ของหน้า
+import ProfileLeft from "./layout";
+import "./completedpage.css";
 
 const CompletedPage = () => {
   const [products, setProducts] = useState([]);
@@ -25,7 +25,7 @@ const CompletedPage = () => {
       fetchCompletedProducts();
     } else {
       alert("กรุณาล็อกอินก่อน");
-      window.location.href = "/login"; // เปลี่ยนไปหน้า login หากไม่ได้ล็อกอิน
+      window.location.href = "/login";
     }
   }, []);
 
@@ -39,7 +39,7 @@ const CompletedPage = () => {
             products.map((product) => (
               <div key={product.ProductID} className="product-card">
                 <img
-                  src={`${product.imageUrl}`}
+                  src={product.imageUrl}
                   alt={product.name}
                   className="product-image"
                 />

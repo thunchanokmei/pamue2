@@ -74,7 +74,7 @@ const ProductDetail = () => {
         <p className="product-seller">Seller: {product.seller?.name || "N/A"}</p>
         <p className="product-sale-date">{new Date(product.saleDate).toLocaleDateString()}</p>
         <div className="product-buttons">
-          <button className="wishlist-button" onClick={handleAddToWishlist}>
+          <button className="wishlist-button-dt" onClick={handleAddToWishlist}>
             Add to Wish List
           </button>
           <button className="buy-button" onClick={handleBuyNow}>

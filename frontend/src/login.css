@@ -29,13 +29,15 @@
     border-radius: 50px;
     margin-right: 90px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: max 400px;;
+    max-width: 450px;
   }
   
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  .form-container h2 {
+    text-align: center!important;
+    margin-top: 0%;
+    margin-left: 0%;
     color: #187fed;
+
   }
   
   .form-group {

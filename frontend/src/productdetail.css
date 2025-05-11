@@ -83,7 +83,7 @@
   margin-top: auto;
 }
 
-.wishlist-button,
+.wishlist-button-dt,
 .buy-button {
   flex: 1;
   padding: 12px;
@@ -95,12 +95,12 @@
   transition: background-color 0.3s ease;
 }
 
-.wishlist-button {
+.wishlist-button-dt{
   background-color: #ffc107;
   color: #fff;
 }
 
-.wishlist-button:hover {
+.wishlist-butto-dt:hover {
   background-color: #e0a800;
 }
 
