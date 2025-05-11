@@ -7,7 +7,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [paymentTime, setPaymentTime] = useState(""); // เวลาชำระเงิน
-  const [setIsPaymentConfirmed] = useState(false); // สถานะการกรอกเวลา
+  const [,setIsPaymentConfirmed] = useState(false); // สถานะการกรอกเวลา
 
   useEffect(() => {
     const fetchProduct = async () => {

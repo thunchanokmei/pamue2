@@ -75,6 +75,9 @@ const ProfilePage = () => {
           <p><strong>Phone:</strong> {userData.phone || "N/A"}</p>
           <p><strong>Student ID:</strong> {userData.studentCode || "N/A"}</p>
           <p><strong>Address:</strong> {userData.address || "N/A"}</p>
+    
+            {/* ส่วนสำหรับอัปโหลด QR Code */}
+            
           <div className="upload-section">
             <input type="file" onChange={handleFileChange} />
             <button onClick={handleUpload}>Upload QR Image</button>
