@@ -6,11 +6,19 @@ const WishlistPage = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
 
   useEffect(() => {
-    const userId = 1; // สมมติ userId เป็น 1
+    const storedUser = localStorage.getItem("user"); // ดึงข้อมูลผู้ใช้จาก localStorage
+    const user = storedUser ? JSON.parse(storedUser) : null; // แปลงข้อมูล JSON เป็น Object
+
+    if (!user || !user.UserID) {
+      console.error("User is not logged in or UserID is missing.");
+      return;
+    }
 
     const fetchWishlist = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/products/userwishlist?userId=${userId}`);
+        const response = await fetch(
+          `http://localhost:5001/api/products/userwishlist?userId=${user.UserID}`
+        );
         const data = await response.json();
         setWishlistItems(data);
       } catch (error) {
@@ -37,14 +45,23 @@ const WishlistPage = () => {
           wishlistItems.map((item) => (
             <div key={item.ProductID} className="wishlist-card">
               <Link to={`/product/${item.ProductID}`}>
-                <img src={item.product.imageUrl || "https://via.placeholder.com/150"} alt={item.product.name} />
+                <img
+                  src={item.product.imageUrl || "https://via.placeholder.com/150"}
+                  alt={item.product.name}
+                />
                 <h3>{item.product.name}</h3>
               </Link>
               <p className="wishlist-price">{item.product.price} THB</p>
-              <div className="wishlist-stars">{renderStars(item.product.condition)}</div>
+              <div className="wishlist-stars">
+                {renderStars(item.product.condition)}
+              </div>
               <p className="wishlist-description">{item.product.description}</p>
-              <p className="wishlist-seller">Seller: {item.product.seller?.name || "N/A"}</p>
-              <p className="wishlist-sale-date">{new Date(item.product.saleDate).toLocaleDateString()}</p>
+              <p className="wishlist-seller">
+                Seller: {item.product.seller?.name || "N/A"}
+              </p>
+              <p className="wishlist-sale-date">
+                {new Date(item.product.saleDate).toLocaleDateString()}
+              </p>
             </div>
           ))
         ) : (

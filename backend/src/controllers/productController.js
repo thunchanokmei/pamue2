@@ -202,18 +202,35 @@ const getWishlistByUser = async (req, res) => {
   const { userId } = req.query;
 
   try {
+    // ดึงรายการ Wishlist ของผู้ใช้ พร้อมข้อมูลสินค้าและผู้ขาย
     const wishlistItems = await prisma.wishList.findMany({
       where: { UserID: parseInt(userId, 10) },
       include: {
         product: {
           include: {
-            seller: true,
+            seller: true, // ดึงข้อมูลผู้ขาย
           },
         },
       },
     });
 
-    res.status(200).json(wishlistItems);
+    // กรองเฉพาะสินค้าที่มีสถานะ AVALIABLE
+    const availableItems = wishlistItems.filter(
+      (item) => item.product.status === "AVALIABLE"
+    );
+
+    // ลบสินค้าที่สถานะไม่ใช่ AVALIABLE ออกจาก Wishlist
+    const unavailableItems = wishlistItems.filter(
+      (item) => item.product.status !== "AVALIABLE"
+    );
+
+    for (const item of unavailableItems) {
+      await prisma.wishList.delete({
+        where: { WishlistID: item.WishlistID },
+      });
+    }
+
+    res.status(200).json(availableItems);
   } catch (error) {
     console.error("Error fetching wishlist:", error);
     res.status(500).json({ error: "Failed to fetch wishlist" });
