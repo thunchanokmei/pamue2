@@ -72,22 +72,25 @@ const Home = () => {
       </div>
       {/* ส่วนแสดงปุ่ม Category */}
       <div className="categories">
-        <button
-          className={!selectedCategory ? "active" : ""}
-          onClick={() => setSelectedCategory(null)}
-        >
-          All Categories
-        </button>
-        {categories.map((category) => (
-          <button
-            key={category.CategoryID}
-            className={selectedCategory === category.CategoryID ? "active" : ""}
-            onClick={() => setSelectedCategory(category.CategoryID)}
-          >
-            {category.name}
-          </button>
-        ))}
-      </div>
+  <button
+    className={`category-button ${!selectedCategory ? "active" : ""}`}
+    onClick={() => setSelectedCategory(null)}
+  >
+    All Categories
+  </button>
+  {categories.map((category, index) => (
+    <button
+      key={category.CategoryID}
+      className={`category-button category-${index} ${
+        selectedCategory === category.CategoryID ? "active" : ""
+      }`}
+      onClick={() => setSelectedCategory(category.CategoryID)}
+    >
+      {category.name}
+    </button>
+  ))}
+</div>
+
 
       {/* ส่วนแสดงสินค้า */}
       <div className="products-home">

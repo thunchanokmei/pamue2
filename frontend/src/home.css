@@ -8,24 +8,6 @@ body {
     padding-top: 130px;
   }
   
-  .categories {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .categories button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .categories button.active {
-    background-color: #007bff;
-    color: white;
-  }
   
   .products-home {
     display: grid;
@@ -99,4 +81,49 @@ body {
     padding: 5px 10px;
     border-radius: 20px;
   }
+  .categories {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;        /* ✅ ให้เลื่อนได้แนวนอน */
+    white-space: nowrap;     /* ✅ ไม่ให้ตัดลงบรรทัดใหม่ */
+    gap: 12px;
+    padding: 10px 20px;
+    scrollbar-width: none;   /* ✅ สำหรับ Firefox */
+  }
+  
+  .categories::-webkit-scrollbar {
+    display: none;           /* ✅ สำหรับ Chrome/Safari */
+  }
+  
+  .category-button {
+    flex-shrink: 0;  
+    width:13.5%         /* ✅ ห้ามย่อขนาด */;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f0f0f0;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .category-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .category-button.active {
+    background-color: #ffb3c1;
+    color: white;
+  }
+  
+  /* สีปุ่มแต่ละหมวด */
+  .category-0 { background-color: #ffe0f0; }
+  .category-1 { background-color: #e0f7fa; }
+  .category-2 { background-color: #e8f5e9; }
+  .category-3 { background-color: #fff3e0; }
+  .category-4 { background-color: #ede7f6; }
+  .category-5 { background-color: #fce4ec; }
   

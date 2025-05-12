@@ -11,7 +11,7 @@ import iconprofile from "./image/profileicon.png";
 const ProfileLeft = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const username = location.state?.username || "Guest"; // รับชื่อผู้ใช้จาก state หรือใช้ "Guest" เป็นค่าเริ่มต้น
+  const username = location.state?.username || "Pamue 2"; // รับชื่อผู้ใช้จาก state หรือใช้ "Guest" เป็นค่าเริ่มต้น
 
   return (
     <div className="profile-left">
