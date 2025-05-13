@@ -157,7 +157,10 @@ const getCustomerProducts = async (req, res) => {
     }
 
     const products = await prisma.product.findMany({
-      where: { customerId: parseInt(customerId, 10) },
+      where: {
+        customerId: parseInt(customerId, 10),
+        NOT: { status: "AVALIABLE" }, // กรองสินค้าที่ status ไม่ใช่ AVALIABLE
+      },
       include: {
         category: true, // ดึงข้อมูลหมวดหมู่
         seller: true,   // ดึงข้อมูลผู้ขาย
