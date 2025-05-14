@@ -71,6 +71,12 @@ const ConfirmPayment = () => {
                   <h3>{product.name}</h3>
                   <p>{product.description}</p>
                   <p className="price">{product.price} บาท</p>
+                  <div className="customer-info">
+                    <h4>ข้อมูลผู้ซื้อ:</h4>
+                    <p>ชื่อ: {product.customer?.name || "ไม่ระบุ"}</p>
+                    <p>เบอร์โทร: {product.customer?.phone || "ไม่ระบุ"}</p>
+                    <p>ที่อยู่: {product.customer?.address || "ไม่ระบุ"}</p>
+                  </div>
                   <button
                     className="confirm-button"
                     onClick={() => handleConfirmOrder(product.ProductID)}

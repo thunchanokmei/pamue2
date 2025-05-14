@@ -85,3 +85,24 @@
 .confirm-button:hover {
   background-color: #218838;
 }
+
+.customer-info {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.customer-info h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.customer-info p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #555;
+}
