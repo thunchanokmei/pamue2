@@ -24,7 +24,13 @@ const ProductDetail = () => {
   }, [id]);
 
   const handleAddToWishlist = async () => {
-    const userId = 1 ; 
+    const storedUser = localStorage.getItem("user"); // ดึงข้อมูลผู้ใช้จาก localStorage
+    const user = storedUser ? JSON.parse(storedUser) : null;
+
+    if (!user || !user.UserID) {
+      alert("กรุณาล็อกอินก่อน");
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:5001/api/products/addwishlist", {
@@ -32,7 +38,7 @@ const ProductDetail = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, productId: product.ProductID }),
+        body: JSON.stringify({ userId: user.UserID, productId: product.ProductID }), // ใช้ user.UserID
       });
 
       if (response.ok) {

@@ -63,9 +63,9 @@ const StatusPage = () => {
         <h2 className="status-title">สถานะสินค้าที่ซื้อ</h2>
         <div className="status-card">
           {products.length > 0 ? (
-            <div className="product-list">
+            <div className="status-product-list">
               {products.map((product) => (
-                <div key={product.ProductID} className="product-card">
+                <div key={product.ProductID} className="status-product-card">
                   <img
                     src={product.imageUrl || "https://via.placeholder.com/150"}
                     alt={product.name}
@@ -73,7 +73,12 @@ const StatusPage = () => {
                   />
                   <h3>{product.name}</h3>
                   <p>ราคา: {product.price} THB</p>
-                  <p>สภาพสินค้า: {Array(product.condition).fill("★").join("")}</p>
+                  <p>
+                    สภาพสินค้า: {""}
+                    <span className="stars">
+                    {Array(product.condition).fill("★").join("")}
+                    </span>
+                  </p>
                   <p>ผู้ขาย: {product.seller?.name || "N/A"}</p>
                   <button
                     className="status-button-dt"
